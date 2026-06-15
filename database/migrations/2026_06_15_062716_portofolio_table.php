@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('portofolio', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('kategori')->nullable(); // e.g. "REKAYASA AKADEMIK"
             $table->text('keterangan');
             $table->string('foto')->nullable();
             $table->integer('urutan')->default(0);

@@ -11,11 +11,9 @@ return new class extends Migration
         // 1. Tabel Profil perusahaan (Dinamis isi visi, misi, kontak)
         Schema::create('profil_perusahaan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_perusahaan');
-            $table->string('logo_perusahaan')->nullable();
-            $table->text('sejarah_singkat');
-            $table->text('visi');
-            $table->text('misi');
+            $table->string('judul');
+            $table->string('foto')->nullable();
+            $table->text('deskripsi');
             $table->string('alamat');
             $table->string('whatsapp_kontak');
             $table->string('instagram_link')->nullable();
@@ -24,18 +22,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // 2. Tabel Berita / Kegiatan Perusahaan (CRUD Tim Media)
-        Schema::create('kegiatan', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul_kegiatan');
-            $table->string('slug')->unique();
-            $table->text('deskripsi_singkat');
-            $table->longText('konten_lengkap');
-            $table->string('foto_kegiatan')->nullable();
-            $table->date('tanggal_kegiatan');
-            $table->string('penulis');
-            $table->timestamps();
-        });
+       
     }
 
     public function down(): void
