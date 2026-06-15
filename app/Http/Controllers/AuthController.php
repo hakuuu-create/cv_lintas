@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function showLogin()
     {
         if (Auth::check()) {
-            return redirect()->intended('/admin/dashboard'); // Idealnya diarahkan ke dashboard masing-masing jika sudah login
+            return redirect()->route('media.dashboard');
         }
         return view('auth.login');
     }
@@ -20,15 +20,26 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email'    => ['required', 'email'],
             'password' => ['required'],
         ], [
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
+            'email.required'    => 'Email wajib diisi.',
+            'email.email'       => 'Format email tidak valid.',
             'password.required' => 'Password wajib diisi.',
         ]);
 
-        return view('media.dashboard');
+        $remember = $request->boolean('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('media.dashboard'));
+        }
+
+        return back()
+            ->withInput($request->only('email'))
+            ->withErrors([
+                'email' => 'Email atau password yang Anda masukkan salah.',
+            ]);
     }
 
     // Memproses logout

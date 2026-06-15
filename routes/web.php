@@ -21,7 +21,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth', 'role:admin|staf_media'])->prefix('dashboard-media')->group(function () {
+Route::middleware(['auth'])->prefix('dashboard-media')->group(function () {
 
     // Halaman Utama Dashboard Media
     Route::get('/', [MediaController::class, 'index'])->name('media.dashboard');

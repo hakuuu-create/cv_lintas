@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Media;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ProfilPesantren;
-use App\Models\KegiatanPesantren;
+use App\Models\ProfilPerusahaan;
+use App\Models\Kegiatan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -14,85 +14,80 @@ class MediaController extends Controller
 {
     public function index()
     {
-        $totalKegiatan = KegiatanPesantren::count();
+        $totalKegiatan = Kegiatan::count();
         return view('media.dashboard', compact('totalKegiatan'));
     }
 
     // ==========================================
-    // ⚙️ PENGELOLAAN PROFIL PESANTREN
+    // ⚙️ PENGELOLAAN PROFIL PERUSAHAAN
     // ==========================================
     public function editProfil()
     {
-        // Ambil data profil atau buat instansiasi kosong jika belum pernah diisi
-        $profil = ProfilPesantren::first() ?? new ProfilPesantren();
+        $profil = ProfilPerusahaan::first() ?? new ProfilPerusahaan();
         return view('media.profil', compact('profil'));
     }
 
     public function updateProfil(Request $request)
     {
-        $profil = ProfilPesantren::first() ?? new ProfilPesantren();
+        $profil = ProfilPerusahaan::first() ?? new ProfilPerusahaan();
 
-        // 1. Definisikan aturan validasi dengan batas max 2048 KB (2 MB)
         $rules = [
-            'nama_pesantren' => 'required|string|max:255',
-            'sejarah_singkat' => 'required',
-            'visi' => 'required',
-            'misi' => 'required',
-            'alamat' => 'required',
-            'whatsapp_kontak' => 'required|numeric',
-            'logo_pesantren' => 'nullable|image|mimes:jpeg,png,jpg|max:2048' // <-- Diubah ke 2048
+            'nama_perusahaan'  => 'required|string|max:255',
+            'sejarah_singkat'  => 'required',
+            'visi'             => 'required',
+            'misi'             => 'required',
+            'alamat'           => 'required',
+            'whatsapp_kontak'  => 'required|numeric',
+            'logo_perusahaan'  => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
 
-        // 2. Buat pesan error kustom dalam Bahasa Indonesia
         $messages = [
-            'logo_pesantren.image' => 'File yang diunggah harus berupa gambar.',
-            'logo_pesantren.mimes' => 'Format gambar harus berupa jpeg, png, atau jpg.',
-            'logo_pesantren.max'   => 'Ukuran foto logo terlalu besar! Maksimal ukuran yang diperbolehkan adalah 2 MB (2048 KB).',
+            'logo_perusahaan.image' => 'File yang diunggah harus berupa gambar.',
+            'logo_perusahaan.mimes' => 'Format gambar harus berupa jpeg, png, atau jpg.',
+            'logo_perusahaan.max'   => 'Ukuran foto logo terlalu besar! Maksimal 2 MB.',
         ];
 
-        // Jalankan validasi dengan pesan kustom
         $request->validate($rules, $messages);
 
-        // Pemetaan data secara manual
-        $profil->nama_pesantren = $request->nama_pesantren;
-        $profil->sejarah_singkat = $request->sejarah_singkat;
-        $profil->visi = $request->visi;
-        $profil->misi = $request->misi;
-        $profil->alamat = $request->alamat;
-        $profil->whatsapp_kontak = $request->whatsapp_kontak;
-        $profil->instagram_link = $request->instagram_link;
-        $profil->facebook_link = $request->facebook_link;
-        $profil->youtube_link = $request->youtube_link;
+        $profil->nama_perusahaan  = $request->nama_perusahaan;
+        $profil->sejarah_singkat  = $request->sejarah_singkat;
+        $profil->visi             = $request->visi;
+        $profil->misi             = $request->misi;
+        $profil->alamat           = $request->alamat;
+        $profil->whatsapp_kontak  = $request->whatsapp_kontak;
+        $profil->instagram_link   = $request->instagram_link;
+        $profil->facebook_link    = $request->facebook_link;
+        $profil->youtube_link     = $request->youtube_link;
 
-        // Logika Upload Logo
-        if ($request->hasFile('logo_pesantren')) {
-            if ($profil->logo_pesantren) {
-                \Illuminate\Support\Facades\Storage::delete('public/' . $profil->logo_pesantren);
+        if ($request->hasFile('logo_perusahaan')) {
+            if ($profil->logo_perusahaan) {
+                Storage::delete('public/' . $profil->logo_perusahaan);
             }
-            $profil->logo_pesantren = $request->file('logo_pesantren')->store('assets/logo', 'public');
+            $profil->logo_perusahaan = $request->file('logo_perusahaan')->store('assets/logo', 'public');
         }
 
         $profil->save();
 
-        return redirect()->back()->with('success', 'Profil pondok pesantren berhasil diperbarui!');
-    } 
-   // ==========================================
-    // 📰 PENGELOLAAN BERITA KEGIATAN (MODAL AJAX)
+        return redirect()->back()->with('success', 'Profil perusahaan berhasil diperbarui!');
+    }
+
+    // ==========================================
+    // 📰 PENGELOLAAN KEGIATAN
     // ==========================================
     public function indexKegiatan()
     {
-        $kegiatan = KegiatanPesantren::orderBy('tanggal_kegiatan', 'desc')->paginate(10);
+        $kegiatan = Kegiatan::orderBy('tanggal_kegiatan', 'desc')->paginate(10);
         return view('media.kegiatan.index', compact('kegiatan'));
     }
 
     public function storeKegiatan(Request $request)
     {
         $request->validate([
-            'judul_kegiatan' => 'required|string|max:255',
-            'deskripsi_singkat' => 'required|max:500',
-            'konten_lengkap' => 'required',
+            'judul_kegiatan'   => 'required|string|max:255',
+            'deskripsi_singkat'=> 'required|max:500',
+            'konten_lengkap'   => 'required',
             'tanggal_kegiatan' => 'required|date',
-            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'foto_kegiatan'    => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $fotoPath = null;
@@ -100,14 +95,14 @@ class MediaController extends Controller
             $fotoPath = $request->file('foto_kegiatan')->store('assets/kegiatan', 'public');
         }
 
-        KegiatanPesantren::create([
-            'judul_kegiatan' => $request->judul_kegiatan,
-            'slug' => Str::slug($request->judul_kegiatan) . '-' . time(),
-            'deskripsi_singkat' => $request->deskripsi_singkat,
-            'konten_lengkap' => $request->konten_lengkap,
+        Kegiatan::create([
+            'judul_kegiatan'   => $request->judul_kegiatan,
+            'slug'             => Str::slug($request->judul_kegiatan) . '-' . time(),
+            'deskripsi_singkat'=> $request->deskripsi_singkat,
+            'konten_lengkap'   => $request->konten_lengkap,
             'tanggal_kegiatan' => $request->tanggal_kegiatan,
-            'foto_kegiatan' => $fotoPath,
-            'penulis' => Auth::user()->name
+            'foto_kegiatan'    => $fotoPath,
+            'penulis'          => Auth::user()->name,
         ]);
 
         return redirect()->back()->with('success', 'Kegiatan baru berhasil dipublikasikan!');
@@ -115,25 +110,25 @@ class MediaController extends Controller
 
     public function editKegiatan($id)
     {
-        $kegiatan = KegiatanPesantren::findOrFail($id);
+        $kegiatan = Kegiatan::findOrFail($id);
         return response()->json($kegiatan);
     }
 
     public function updateKegiatan(Request $request, $id)
     {
-        $kegiatan = KegiatanPesantren::findOrFail($id);
+        $kegiatan = Kegiatan::findOrFail($id);
 
         $request->validate([
-            'judul_kegiatan' => 'required|string|max:255',
-            'deskripsi_singkat' => 'required|max:500',
-            'konten_lengkap' => 'required',
+            'judul_kegiatan'   => 'required|string|max:255',
+            'deskripsi_singkat'=> 'required|max:500',
+            'konten_lengkap'   => 'required',
             'tanggal_kegiatan' => 'required|date',
-            'foto_kegiatan' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'foto_kegiatan'    => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $kegiatan->judul_kegiatan = $request->judul_kegiatan;
-        $kegiatan->deskripsi_singkat = $request->deskripsi_singkat;
-        $kegiatan->konten_lengkap = $request->konten_lengkap;
+        $kegiatan->judul_kegiatan   = $request->judul_kegiatan;
+        $kegiatan->deskripsi_singkat= $request->deskripsi_singkat;
+        $kegiatan->konten_lengkap   = $request->konten_lengkap;
         $kegiatan->tanggal_kegiatan = $request->tanggal_kegiatan;
 
         if ($request->hasFile('foto_kegiatan')) {
@@ -149,7 +144,7 @@ class MediaController extends Controller
 
     public function destroyKegiatan($id)
     {
-        $kegiatan = KegiatanPesantren::findOrFail($id);
+        $kegiatan = Kegiatan::findOrFail($id);
         if ($kegiatan->foto_kegiatan) {
             Storage::delete('public/' . $kegiatan->foto_kegiatan);
         }
