@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ProfilPerusahaan;
-use App\Models\Kegiatan;
-use App\Models\Card;
+use App\Models\Portofolio;
+use App\Models\Creator;
 
 class LandingPageController extends Controller
 {
@@ -13,18 +13,20 @@ class LandingPageController extends Controller
     {
         // Ambil data profil perusahaan baris pertama
         $profil = ProfilPerusahaan::first();
-        
-        // Ambil 3 kegiatan terbaru untuk ditampilkan di section berita
-        $card = card::all();
+        $creator = Creator::first();
+        $portofolios = Portofolio::where('is_active', 1)
+            ->latest()
+            ->take(3)
+            ->get();
 
-        return view('landing.index', compact('profil', 'card'));
+        return view('landing.index', compact('profil', 'portofolios', 'creator'));
     }
 
-    public function detailCard($id)
+    public function detailPortofolio($id)
     {
         $profil = ProfilPerusahaan::first();
-        $card = card::where('id')->firstOrFail();
-        
-        return view('landing.detail_kegiatan', compact('profil', 'card'));
+        $portofolios = Portofolio::where('id')->firstOrFail();
+
+        return view('landing.detail_kegiatan', compact('profil', 'portofolios'));
     }
 }

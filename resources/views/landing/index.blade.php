@@ -155,9 +155,9 @@
                     class="text-xs uppercase tracking-wider font-medium text-secondary hover:text-primary transition-colors">
                     Layanan
                 </a>
-                <a href="#daftar-proyek"
+                <a href="#portofolio"
                     class="text-xs uppercase tracking-wider font-medium text-secondary hover:text-primary transition-colors">
-                    Daftar
+                    Portofolio
                 </a>
                 <a href="#kreator"
                     class="text-xs uppercase tracking-wider font-medium text-secondary hover:text-primary transition-colors">
@@ -329,98 +329,64 @@
             </div>
         </div>
     </section>
-    <section id="daftar-proyek" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto space-y-16 scroll-mt-20">
+
+    {{-- Daftar portofolio --}}
+    <section id="portofolio" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto space-y-16 scroll-mt-20">
 
         <div class="border-t border-tertiary pt-10 mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">03 / DAFTAR PROJEK</p>
-            <h2 class="headline-lg text-primary uppercase md:col-span-2">Proyek kami Yang Telah Selesai</h2>
+            <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">03 / PORTOFOLIO</p>
+            <h2 class="headline-lg text-primary uppercase md:col-span-2">Portofolio Kami Yang Telah Selesai</h2>
         </div>
 
         <div class="space-y-8">
-
-            {{-- Card 1 --}}
-            <div
-                class="tunggu-scroll bg-surface border border-tertiary rounded-framer-md p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                <div class="md:col-span-7 space-y-4">
-                    <p class="text-xs text-secondary tracking-widest uppercase font-bold">REKAYASA AKADEMIK</p>
-                    <h3 class="headline-md text-primary uppercase">Sistem Academic Terintegrasi</h3>
-                    <p class="body-md text-secondary leading-relaxed text-justify">
-                        Sistem manajemen data pendidikan terpadu untuk pengarsipan rapor berkala, pencatatan performa
-                        siswa secara dinamis, dan fasilitas komunikasi internal instansi yang responsif di berbagai
-                        peranti mobile.
-                    </p>
-                </div>
+            @foreach($portofolios as $portofolio)
+                {{-- Card Portofolio Dinamis --}}
                 <div
-                    class="md:col-span-5 border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[16/10] relative flex items-center justify-center">
-                    <img src="https://media.tenor.com/ngY5lNArvSIAAAAe/catboss.png" alt="[Tampilan Aplikasi Akademik]"
-                        class="w-full h-full object-cover grayscale opacity-80"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="hidden absolute inset-0 flex-col items-center justify-center p-4 bg-neutral">
-                        <i class="fa-solid fa-graduation-cap text-tertiary text-3xl mb-2"></i>
-                        <span class="text-[11px] text-secondary tracking-wider">ASET WEB AKADEMIK</span>
+                    class="tunggu-scroll bg-surface border border-tertiary rounded-framer-md p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+
+                    <div class="md:col-span-7 space-y-4">
+                        <p class="text-xs text-secondary tracking-widest uppercase font-bold">{{ $portofolio->sub_judul }}
+                        </p>
+                        <h3 class="headline-md text-primary uppercase">{{ $portofolio->judul }}</h3>
+                        <p class="body-md text-secondary leading-relaxed text-justify">
+                            {{ $portofolio->deskripsi }}
+                        </p>
+                    </div>
+
+                    <div
+                        class="md:col-span-5 border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[16/10] relative flex items-center justify-center">
+
+                        @if($portofolio->foto)
+                            <img src="{{ asset('storage/' . $portofolio->foto) }}" alt="[Tampilan {{ $portofolio->judul }}]"
+                                class="w-full h-full object-cover opacity-80"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        @else
+                            <img src="https://media.tenor.com/ngY5lNArvSIAAAAe/catboss.png" alt="[Tampilan Default]"
+                                class="w-full h-full object-cover opacity-80"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        @endif
                     </div>
                 </div>
-            </div>
-
-            {{-- Card 2 --}}
-            <div
-                class="tunggu-scroll bg-surface border border-tertiary rounded-framer-md p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                <div class="md:col-span-7 space-y-4">
-                    <p class="text-xs text-secondary tracking-widest uppercase font-bold">PROFIL DIGITAL</p>
-                    <h3 class="headline-md text-primary uppercase">Landing Page Company Profile</h3>
-                    <p class="body-md text-secondary leading-relaxed text-justify">
-                        Halaman mendarat dengan orientasi kecepatan muat instan, dioptimalkan sepenuhnya untuk optimasi
-                        halaman pencarian (SEO), menampilkan identitas korporasi secara modern dan bersih.
-                    </p>
-                </div>
-                <div
-                    class="md:col-span-5 border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[16/10] relative flex items-center justify-center">
-                    <img src="https://media.tenor.com/ngY5lNArvSIAAAAe/catboss.png" alt="[Tampilan Landing Page]"
-                        class="w-full h-full object-cover grayscale opacity-80"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="hidden absolute inset-0 flex-col items-center justify-center p-4 bg-neutral">
-                        <i class="fa-solid fa-globe text-tertiary text-3xl mb-2"></i>
-                        <span class="text-[11px] text-secondary tracking-wider">ASET COMPANY PROFILE</span>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Card 3 --}}
-            <div
-                class="tunggu-scroll bg-surface border border-tertiary rounded-framer-md p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                <div class="md:col-span-7 space-y-4">
-                    <p class="text-xs text-secondary tracking-widest uppercase font-bold">NIAGA ELEKTRONIK</p>
-                    <h3 class="headline-md text-primary uppercase">Platform Toko Online Mandiri</h3>
-                    <p class="body-md text-secondary leading-relaxed text-justify">
-                        Infrastruktur perdagangan daring independen dengan sistem inventori waktu nyata, alur pembayaran
-                        transparan, integrasi kalkulator biaya kirim instan, dan basis data aman.
-                    </p>
-                </div>
-                <div
-                    class="md:col-span-5 border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[16/10] relative flex items-center justify-center">
-                    <img src="https://media.tenor.com/ngY5lNArvSIAAAAe/catboss.png" alt="[Tampilan Aplikasi E-commerce]"
-                        class="w-full h-full object-cover grayscale opacity-80"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="hidden absolute inset-0 flex-col items-center justify-center p-4 bg-neutral">
-                        <i class="fa-solid fa-basket-shopping text-tertiary text-3xl mb-2"></i>
-                        <span class="text-[11px] text-secondary tracking-wider">ASET WEB E-COMMERCE</span>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
+
     </section>
 
     {{-- 04 / Kreatif & Social media --}}
-    <section id="kreator" class="tunggu-scroll py-15 px-6 max-w-7xl mx-auto scroll-mt-20">
+    <section id="kreator" class="tunggu-scroll py-13 px-6 max-w-7xl mx-auto">
         <div class="border-t border-tertiary pt-10 mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATIF & SOCIAL MEDIA
-                Division</p>
-            <h2 class="headline-lg text-primary uppercase md:col-span-2">Optimasi & Tren Digital</h2>
+            <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATIF DIVISION</p>
+            <h2 class="headline-lg text-primary uppercase md:col-span-2">Optimasi Tren Digital & Kreator</h2>
         </div>
+
         <div
             class="bg-surface border border-tertiary rounded-framer-md p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
             <div class="space-y-6">
+                <div class="space-y-2">
+                    <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">Kreator Digital</p>
+                    <h3 class="headline-md text-primary uppercase">Strategi, Kreativitas & Inovasi</h3>
+                </div>
 
                 <p class="body-md text-secondary leading-relaxed">
                     Kami merancang dan mengeksekusi materi kreatif yang disesuaikan dengan pola konsumsi konten masa
@@ -432,23 +398,33 @@
                 <div class="space-y-3 pt-4">
                     <h4 class="text-xs uppercase tracking-widest text-primary font-bold">Afiliasi Kreator Resmi:</h4>
                     <div class="flex flex-wrap gap-2.5">
-                        <span
-                            class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">@anis_khaeriyah</span>
-                        <span
-                            class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">@apakatamiii</span>
-                        <span
-                            class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">@uhuy</span>
+                        @if($creator && $creator->username_1)
+                            <span
+                                class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">{{ $creator->username_1 }}</span>
+                        @endif
+                        @if($creator && $creator->username_2)
+                            <span
+                                class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">{{ $creator->username_2 }}</span>
+                        @endif
+                        @if($creator && $creator->username_3)
+                            <span
+                                class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">{{ $creator->username_3 }}</span>
+                        @endif
                     </div>
                 </div>
             </div>
 
+            <!-- Frame Foto Produksi Minimalis -->
             <div
-                class="border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[2/1] relative flex items-center justify-center">
-                <img src="https://media.tenor.com/ngY5lNArvSIAAAAe/catboss.png"
-                    alt="[Ilustrasi produksi pembuatan konten media sosial]"
-                    class="w-full h-full object-cover grayscale opacity-80 hover:scale-105 hover:grayscale-0 transition-all duration-500"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="hidden absolute inset-0 flex-col items-center justify-center p-4 bg-neutral">
+                class="border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[4/3] relative flex items-center justify-center">
+                @if($creator && $creator->foto)
+                    <img src="{{ asset('storage/' . $creator->foto) }}"
+                        alt="[Ilustrasi produksi pembuatan konten media sosial]"
+                        class="w-full h-full object-cover grayscale opacity-80 hover:scale-105 hover:grayscale-0 transition-all duration-500"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                @endif
+                <div
+                    class="{{ $creator && $creator->foto ? 'hidden' : '' }} absolute inset-0 flex-col items-center justify-center p-4 bg-neutral flex">
                     <i class="fa-solid fa-clapperboard text-tertiary text-4xl mb-3"></i>
                     <span class="text-xs text-secondary font-medium uppercase tracking-widest">PRODUKSI KONTEN
                         SOSIAL</span>
@@ -457,6 +433,8 @@
 
         </div>
     </section>
+
+    {{-- Alur Kerja --}}
     <section id="alur-kerja" class="tunggu-scroll py-20 px-6 max-w-7xl mx-auto scroll-mt-20">
         <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
             <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">05 / PROSES TIM</p>

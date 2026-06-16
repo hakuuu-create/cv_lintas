@@ -1,7 +1,7 @@
 @extends('layouts.sidebar')
 
 @section('title', 'Profil')
-@section('page_title', 'Pengaturan Profil')
+@section('page_title', 'Pengaturan Profil Perusahaan')
 
 @section('content')
     <div class="max-w-4xl mx-auto space-y-6 text-xs">
@@ -47,12 +47,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4 border-b border-slate-50">
 
                     {{-- Nama perusahaan / Name Company --}}
-                    <div class="md:col-span-1">
+                    {{-- <div class="md:col-span-1">
                         <label class="block font-semibold text-slate-700 mb-1.5">Nama Perusahaan</label>
                         <input type="text" name="nama_perusahaan"
                             value="{{ old('nama_perusahaan', $profil->nama_perusahaan) }}" required
                             class="w-full px-3 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:border-neutral-800 focus:ring-4 focus:ring-neutral-800/5 transition-all">
-                    </div>
+                    </div> --}}
 
                     {{-- Ganti Logo / Change Logo --}}
                     <div>
@@ -92,25 +92,25 @@
                 </div>
 
                 {{-- Tentang / About --}}
-                <div class="pb-4 border-b border-slate-50">
+                {{-- <div class="pb-4 border-b border-slate-50">
                     <label class="block font-semibold text-slate-700 mb-1.5">Tentang Perusahaan</label>
                     <textarea name="sejarah_singkat" rows="4" required
                         class="w-full px-3 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:border-neutral-800 focus:ring-4 focus:ring-neutral-800/5 transition-all leading-relaxed"
                         placeholder="Latar Belakang...">{{ old('sejarah_singkat', $profil->sejarah_singkat) }}</textarea>
-                </div>
+                </div> --}}
 
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-4 border-b border-slate-50">
 
                     {{-- Alamat Lengkap --}}
-                    <div class="md:col-span-2">
+                    {{-- <div class="md:col-span-2">
                         <label class="block font-semibold text-slate-700 mb-1.5">Alamat Lengkap</label>
                         <textarea name="alamat" required placeholder="Jl Raya...." rows="2"
                             class="w-full px-3 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:border-neutral-800 focus:ring-4 focus:ring-neutral-800/5 transition-all resize-y min-h-[46px] text-slate-800 leading-normal">{{ old('alamat', $profil->alamat) }}</textarea>
-                    </div>
+                    </div> --}}
 
                     {{-- No. WhatsApp --}}
-                    <div class="md:col-span-1">
+                    {{-- <div class="md:col-span-1">
                         <label class="block font-semibold text-slate-700 mb-1.5">No. WhatsApp Humas / Kontak</label>
                         <div class="relative flex items-center">
                             <span
@@ -120,7 +120,7 @@
                                 placeholder="8123456789"
                                 class="w-full pl-12 pr-3 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:border-neutral-800 focus:ring-4 focus:ring-neutral-800/5 transition-all">
                         </div>
-                    </div>
+                    </div> --}}
 
                 </div>
 

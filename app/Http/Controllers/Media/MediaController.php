@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Media;
 
 use App\Http\Controllers\Controller;
+use App\Models\Portofolio;
 use Illuminate\Http\Request;
 use App\Models\ProfilPerusahaan;
-use App\Models\Card;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class MediaController extends Controller
 {
-    public function index()
-    {
-        $totalKegiatan = Card::count();
-        return view('media.dashboard', compact('totalKegiatan'));
-    }
+    // public function index()
+    // {
+    //     $totalKegiatan = Portofolio::count();
+    //     return view('media.dashboard', compact('totalKegiatan'));
+    // }
 
     // ==========================================
     // ⚙️ PENGELOLAAN PROFIL
@@ -34,15 +34,14 @@ class MediaController extends Controller
 
         // 1. Definisikan aturan validasi dengan batas max 5048 KB (5 MB)
         $rules = [
-            'nama_perusahaan' => 'required|string|max:255',
-            'sejarah_singkat' => 'required',
-            'alamat' => 'required',
+            // 'nama_perusahaan' => 'required|string|max:255',
+            // 'sejarah_singkat' => 'required',
+            // 'alamat' => 'required',
             'whatsapp_kontak' => 'required|numeric',
             'logo_perusahaan' => 'nullable|image|mimes:jpeg,png,jpg|max:5048',
             'gambar_perusahaan' => 'nullable|image|mimes:jpeg,png,jpg|max:5048'
         ];
 
-        // 2. Buat pesan error kustom dalam Bahasa Indonesia
         $messages = [
             'logo_perusahaan.image' => 'File yang diunggah harus berupa gambar.',
             'logo_perusahaan.mimes' => 'Format gambar harus berupa jpeg, png, atau jpg.',
@@ -52,25 +51,16 @@ class MediaController extends Controller
             'gambar_perusahaan.max' => 'Ukuran foto logo terlalu besar! Maksimal ukuran yang diperbolehkan adalah 5 MB (5048 KB).',
         ];
 
-        // Jalankan validasi dengan pesan kustom
         $request->validate($rules, $messages);
 
         // Pemetaan data secara manual
-        $profil->nama_perusahaan = $request->nama_perusahaan;
-        $profil->sejarah_singkat = $request->sejarah_singkat;
-        $profil->alamat = $request->alamat;
+        // $profil->nama_perusahaan = $request->nama_perusahaan;
+        // $profil->sejarah_singkat = $request->sejarah_singkat;
+        // $profil->alamat = $request->alamat;
         $profil->whatsapp_kontak = $request->whatsapp_kontak;
         $profil->instagram_link = $request->instagram_link;
         $profil->facebook_link = $request->facebook_link;
         $profil->youtube_link = $request->youtube_link;
-
-
-        // Logika Upload Logo
-        $profil = ProfilPerusahaan::first();
-
-        if (!$profil) {
-            $profil = new ProfilPerusahaan();
-        }
 
         // Logika Bersihkan & Simpan Logo Perusahaan
         if ($request->hasFile('logo_perusahaan')) {

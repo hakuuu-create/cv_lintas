@@ -8,11 +8,11 @@ class ProfilPerusahaan extends Model
 {
     protected $table = 'profil_perusahaan';
     protected $fillable = [
-        'nama_perusahaan',
+        // 'nama_perusahaan',
         'logo_perusahaan',
         'gambar_perusahaan',
-        'sejarah_singkat',
-        'alamat',
+        // 'sejarah_singkat',
+        // 'alamat',
         'whatsapp_kontak',
         'instagram_link',
         'facebook_link',

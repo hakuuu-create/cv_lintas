@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard') - SIM Pesantren</title>
+    <title>@yield('title', 'Dashboard') - Lintas tech</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -41,7 +41,7 @@
                 <div class="flex items-center">
                     <img src="{{ asset('img/logo.webp') }}" alt="Logo Ponpes"
                         class="w-8 h-8 object-contain mr-2.5 rounded bg-neutral-900/40 p-0.5">
-                    <span class="font-bold tracking-tight text-lg">SIM Pesantren</span>
+                    <span class="font-bold tracking-tight text-lg">Lintas Tech</span>
                 </div>
                 <button id="close-sidebar-btn" class="text-neutral-400 hover:text-white md:hidden focus:outline-none">
                     <i class="fa-solid fa-xmark text-xl"></i>
@@ -51,10 +51,10 @@
             <nav class="mt-6 px-4 space-y-1 overflow-y-auto max-h-[calc(100vh-10rem)]">
 
                 {{-- Dashboard --}}
-                <a href="{{ route('media.dashboard') }}"
+                {{-- <a href="{{ route('media.dashboard') }}"
                     class="flex items-center px-4 py-3 text-sm font-medium rounded-md transition-all duration-150 {{ Route::is('admin.media.dashboard') ? 'bg-neutral-800 text-white shadow-inner' : 'text-neutral-300 hover:bg-neutral-800/50' }}">
                     <i class="fa-solid fa-chart-pie mr-3 text-base"></i> Dashboard
-                </a>
+                </a> --}}
 
                 {{-- Profil --}}
                 <a href="{{ route('media.profil.edit') }}"
@@ -63,10 +63,16 @@
                 </a>
 
                 {{-- Daftar Card--}}
-                <a href="{{ route('card.index') }}"
+                <a href="{{ route('portofolio.index') }}"
                     class="flex items
                     -center px-4 py-3 text-sm font-medium rounded-md transition-all duration-150 {{ Route::is('admin.media.kegiatan.index') ? 'bg-neutral-800 text-white shadow-inner' : 'text-neutral-300 hover:bg-neutral-800/50' }}">
-                    <i class="fa-solid fa-clipboard-list mr-3 text-base"></i> Daftar Card
+                    <i class="fa-solid fa-clipboard-list mr-3 text-base"></i> Daftar Portofolio
+                </a>
+
+                {{-- Creator --}}
+                <a href="{{ route('media.creator.edit') }}"
+                    class="flex items-center px-4 py-3 text-sm font-medium rounded-md transition-all duration-150 {{ Route::is('admin.media.kreator.edit') ? 'bg-neutral-800 text-white shadow-inner' : 'text-neutral-300 hover:bg-neutral-800/50' }}">
+                    <i class="fa-solid fa-clapperboard mr-3 text-base"></i> Kreator
                 </a>
             </nav>
         </div>
@@ -80,7 +86,8 @@
                 <div class="truncate">
                     <p class="text-xs font-semibold truncate">{{ Auth::user()->name }}</p>
                     <p class="text-[9px] text-neutral-400 font-bold uppercase tracking-wider">
-                        {{ Auth::user()->roles->pluck('name')->first() ?? 'User' }}</p>
+                        {{ Auth::user()->roles->pluck('name')->first() ?? 'User' }}
+                    </p>
                 </div>
             </div>
             <form action="{{ route('logout') }}" method="POST" class="shrink-0">

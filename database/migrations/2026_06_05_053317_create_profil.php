@@ -11,11 +11,11 @@ return new class extends Migration
         // 1. Tabel Profil perusahaan (Dinamis isi visi, misi, kontak)
         Schema::create('profil_perusahaan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_perusahaan');
+            // $table->string('nama_perusahaan');
             $table->string('logo_perusahaan')->nullable();
             $table->string('gambar_perusahaan')->nullable();
-            $table->text('sejarah_singkat');
-            $table->string('alamat');
+            // $table->text('sejarah_singkat');
+            // $table->string('alamat');
             $table->string('whatsapp_kontak');
             $table->string('instagram_link')->nullable();
             $table->string('facebook_link')->nullable();

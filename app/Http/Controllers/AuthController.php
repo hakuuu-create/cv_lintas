@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function showLogin()
     {
         if (Auth::check()) {
-            return redirect()->intended('/admin/dashboard'); // Idealnya diarahkan ke dashboard masing-masing jika sudah login
+            return redirect()->route('media.dashboard');
         }
         return view('auth.login');
     }
@@ -50,7 +50,7 @@ class AuthController extends Controller
             }
 
             // Redirect ke dashboard tujuan
-            return redirect()->intended('/dashboard-media');
+            return redirect()->intended('/dashboard');
         }
 
         // 3. Jika login gagal (Kredensial salah), lempar balik ke form login dengan pesan error
