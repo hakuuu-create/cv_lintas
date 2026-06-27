@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Media;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Portofolio;
@@ -18,13 +18,13 @@ class PortofolioController extends Controller
         // Hitung berapa portofolio yang sedang aktif (tampil di landing page)
         $activeCount = Portofolio::where('is_active', 1)->count();
 
-        return view('media.kegiatan.index', compact('portofolios', 'activeCount'));
+        return view('admin.kegiatan.index', compact('portofolios', 'activeCount'));
     }
 
     // create
     public function create()
     {
-        return view('media.kegiatan.card.create');
+        return view('admin.kegiatan.card.create');
     }
 
     // store (Membuat Portofolio Baru)

@@ -1,46 +1,46 @@
 <?php
 
-use App\Http\Controllers\Media\CardController;
-use App\Http\Controllers\Media\CreatorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\Media\MediaController;
-use App\Http\Controllers\Media\PortofolioController;
+use App\Http\Controllers\Admin\LayananController;
+use App\Http\Controllers\Admin\PortofolioController;
+use App\Http\Controllers\Admin\KreatorController;
 
-
-/**
- * ROUTE PUBLIC
- **/
-
+// PUBLIC
 Route::get('/', [LandingPageController::class, 'index'])->name('landing.index');
-Route::get('/kegiatan/{slug}', [LandingPageController::class, 'detailKegiatan'])->name('landing.kegiatan.detail');
 
-
-/**
- * ROUTE AUTENTIKASI
- **/
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+// AUTH
+Route::get('/login',   [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login',  [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function () {
+// DASHBOARD (Protected)
+Route::middleware(['auth'])->prefix('dashboard-media')->name('media.')->group(function () {
 
-    //  Halaman Utama Dashboard Media
-    // Route::get('/', [MediaController::class, 'index'])->name('media.dashboard');
+    // Dashboard
+    Route::get('/', [MediaController::class, 'index'])->name('dashboard');
 
-    // Profil perusahan
-    Route::get('/', [MediaController::class, 'editProfil'])->name('media.profil.edit');
-    Route::put('/profil/update', [MediaController::class, 'updateProfil'])->name('media.profil.update');
+    // Profil
+    Route::get('/profil',        [MediaController::class, 'editProfil']  )->name('profil.edit');
+    Route::put('/profil/update', [MediaController::class, 'updateProfil'])->name('profil.update');
 
-    // Portofolio 
-    Route::get('/portofolio', [PortofolioController::class, 'index'])->name('portofolio.index');
-    Route::post('/portofolio', [PortofolioController::class, 'store'])->name('portofolio.store');
-    Route::get('/portofolio/{id}', [PortofolioController::class, 'show'])->name('portofolio.show');
-    Route::put('/portofolio/{id}', [PortofolioController::class, 'update'])->name('portofolio.update');
-    Route::delete('/portofolio/delete/{id}', [PortofolioController::class, 'destroy'])->name('portofolio.destroy');
+    // Layanan
+    Route::get('/layanan',              [LayananController::class, 'index']  )->name('layanan.index');
+    Route::post('/layanan',             [LayananController::class, 'store']  )->name('layanan.store');
+    Route::put('/layanan/{id}',         [LayananController::class, 'update'] )->name('layanan.update');
+    Route::delete('/layanan/{id}',      [LayananController::class, 'destroy'])->name('layanan.destroy');
 
-    // Creator
-    Route::get('/creator', [CreatorController::class, 'edit'])->name('media.creator.edit');
-    Route::put('/creator/update', [CreatorController::class, 'update'])->name('media.creator.update');
+    // Portofolio
+    Route::get('/portofolio',           [PortofolioController::class, 'index']  )->name('portofolio.index');
+    Route::post('/portofolio',          [PortofolioController::class, 'store']  )->name('portofolio.store');
+    Route::put('/portofolio/{id}',      [PortofolioController::class, 'update'] )->name('portofolio.update');
+    Route::delete('/portofolio/{id}',   [PortofolioController::class, 'destroy'])->name('portofolio.destroy');
+
+    // Kreator
+    Route::get('/kreator',              [KreatorController::class, 'index']  )->name('kreator.index');
+    Route::post('/kreator',             [KreatorController::class, 'store']  )->name('kreator.store');
+    Route::put('/kreator/{id}',         [KreatorController::class, 'update'] )->name('kreator.update');
+    Route::delete('/kreator/{id}',      [KreatorController::class, 'destroy'])->name('kreator.destroy');
 });

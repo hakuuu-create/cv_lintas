@@ -1,13 +1,13 @@
 @extends('layouts.sidebar')
 
-@section('title', 'Dashboard Media')
-@section('page_title', 'Dashboard Konten & Media')
+@section('title', 'Dashboard admin')
+@section('page_title', 'Dashboard Konten & admin')
 
 @section('content')
 <div class="space-y-6">
     <div class="bg-gradient-to-r from-emerald-800 to-emerald-950 p-6 sm:p-8 rounded-2xl text-white shadow-sm relative overflow-hidden">
         <div class="relative z-10 space-y-2">
-            <span class="px-3 py-1 bg-white/20 rounded-full text-[10px] font-bold uppercase tracking-wider">Ruang Kerja Media</span>
+            <span class="px-3 py-1 bg-white/20 rounded-full text-[10px] font-bold uppercase tracking-wider">Ruang Kerja admin</span>
             <h3 class="text-xl sm:text-2xl font-black tracking-tight">Selamat Datang!</h3>
             <p class="text-xs text-emerald-100/90 max-w-xl leading-relaxed">
                 Melalui halaman ini, Anda dapat memperbarui informasi.
@@ -26,10 +26,10 @@
                 </div>
                 <div class="space-y-1">
                     <h4 class="font-bold text-slate-900 text-sm">Identitas Perusahaan</h4>
-                    <p class="text-slate-500 leading-relaxed">Kelola nama lembaga, sejarah pendirian, visi misi, kontak WhatsApp humas, hingga tautan media sosial resmi.</p>
+                    <p class="text-slate-500 leading-relaxed">Kelola nama lembaga, sejarah pendirian, visi misi, kontak WhatsApp humas, hingga tautan admin sosial resmi.</p>
                 </div>
             </div>
-            <a href="{{ route('media.profil.edit') }}" class="w-full text-center py-2.5 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">
+            <a href="{{ route('admin.profil.edit') }}" class="w-full text-center py-2.5 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">
                 Buka Pengaturan Profil
             </a>
         </div>
@@ -44,7 +44,7 @@
                     <p class="text-slate-500 leading-relaxed">Tulis artikel berita, agenda pondok, dokumentasi acara, serta pengumuman penting untuk konsumsi publik.</p>
                 </div>
             </div>
-            {{-- <a href="{{ route('media.kegiatan.index') }}" class="w-full text-center py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-xl transition-all shadow-md shadow-emerald-800/10">
+            {{-- <a href="{{ route('admin.kegiatan.index') }}" class="w-full text-center py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white font-bold rounded-xl transition-all shadow-md shadow-emerald-800/10">
                 Manajemen Berita Kegiatan
             </a> --}}
         </div>

@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        <form action="{{ route('media.creator.update') }}" method="POST" enctype="multipart/form-data"
+        <form action="{{ route('admin.creator.update') }}" method="POST" enctype="multipart/form-data"
             class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
             @csrf
             @method('PUT')

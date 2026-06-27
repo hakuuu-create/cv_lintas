@@ -1,27 +1,26 @@
 <?php
+// database/migrations/xxxx_create_kreator_table.php
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-    /**
-     * Run the migrations.
-     */
+return new class extends Migration
+{
     public function up(): void
     {
-        Schema::create('creators', function (Blueprint $table) {
+        Schema::create('kreator', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('username'); 
+            $table->string('platform')->default('TikTok'); // TikTok / Instagram
             $table->string('foto')->nullable();
-            $table->string('username_1')->nullable();
-            $table->string('username_2')->nullable();
-            $table->string('username_3')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('kreators');
+        Schema::dropIfExists('kreator');
     }
 };
