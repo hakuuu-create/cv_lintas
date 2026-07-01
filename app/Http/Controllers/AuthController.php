@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/AuthController.php
 
 namespace App\Http\Controllers;
 
@@ -11,7 +10,7 @@ class AuthController extends Controller
     public function showLogin()
     {
         if (Auth::check()) {
-            return redirect('/dashboard-media');
+            return redirect()->route('admin.dashboard');
         }
         return view('auth.login');
     }
@@ -32,7 +31,6 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            // Cek apakah user punya role admin
             if (! Auth::user()->isAdmin()) {
                 Auth::logout();
                 return back()->withErrors([
@@ -40,7 +38,7 @@ class AuthController extends Controller
                 ]);
             }
 
-            return redirect()->intended(route('media.dashboard'));
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         return back()
