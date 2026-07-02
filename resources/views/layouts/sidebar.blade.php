@@ -49,76 +49,88 @@
             {{-- NAVIGASI --}}
             <nav class="mt-4 px-3 space-y-0.5">
 
-                {{-- Dashboard --}}
-                <a href="{{ route('admin.dashboard') }}"
-                    class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
-                    {{ Route::is('admin.dashboard') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
-                    <i class="fa-solid fa-gauge-high w-4 text-center"></i>
-                    Dashboard
-                </a>
+    {{-- Dashboard --}}
+    <a href="{{ route('admin.dashboard') }}"
+        class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
+        {{ Route::is('admin.dashboard') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
+        <i class="fa-solid fa-gauge-high w-4 text-center"></i>
+        Dashboard
+    </a>
 
-                <div class="pt-3 pb-1 px-4">
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">Manajemen Konten</p>
-                </div>
+    <div class="pt-3 pb-1 px-4">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-neutral-500">Manajemen Konten</p>
+    </div>
 
-                {{-- Profil --}}
-                <a href="{{ route('admin.profil.edit') }}"
-                    class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
-                    {{ Route::is('admin.profil.edit') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
-                    <i class="fa-solid fa-building-user w-4 text-center"></i>
-                    Profil Perusahaan
-                </a>
+    {{-- Profil Perusahaan (landing page) --}}
+    <a href="{{ route('admin.profil.index') }}"
+        class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
+        {{ Route::is('admin.profil.*') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
+        <i class="fa-solid fa-building-user w-4 text-center"></i>
+        Profil Perusahaan
+    </a>
 
-                {{-- Layanan --}}
-                <a href="{{ route('admin.layanan.index') }}"
-                    class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
-                    {{ Route::is('admin.layanan.*') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
-                    <i class="fa-solid fa-briefcase w-4 text-center"></i>
-                    Layanan
-                </a>
+    {{-- Layanan --}}
+    <a href="{{ route('admin.layanan.index') }}"
+        class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
+        {{ Route::is('admin.layanan.*') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
+        <i class="fa-solid fa-briefcase w-4 text-center"></i>
+        Layanan
+    </a>
 
-                {{-- Portofolio --}}
-                <a href="{{ route('admin.portofolio.index') }}"
-                    class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
-                    {{ Route::is('admin.portofolio.*') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
-                    <i class="fa-solid fa-clipboard-list w-4 text-center"></i>
-                    Portofolio
-                </a>
+    {{-- Portofolio --}}
+    <a href="{{ route('admin.portofolio.index') }}"
+        class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
+        {{ Route::is('admin.portofolio.*') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
+        <i class="fa-solid fa-clipboard-list w-4 text-center"></i>
+        Portofolio
+    </a>
 
-                {{-- Kreator --}}
-                <a href="{{ route('admin.kreator.index') }}"
-                    class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
-                    {{ Route::is('admin.kreator.*') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
-                    <i class="fa-solid fa-clapperboard w-4 text-center"></i>
-                    Kreator
-                </a>
+    {{-- Kreator --}}
+    <a href="{{ route('admin.kreator.index') }}"
+        class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-md transition-all duration-150
+        {{ Route::is('admin.kreator.*') ? 'bg-blue-600 text-white' : 'text-neutral-300 hover:bg-neutral-800' }}">
+        <i class="fa-solid fa-clapperboard w-4 text-center"></i>
+        Kreator
+    </a>
 
-            </nav>
+</nav>
         </div>
 
         {{-- FOOTER SIDEBAR (User Info + Logout) --}}
-        <div class="p-4 bg-black/60 border-t border-neutral-800 flex items-center justify-between">
-            <div class="flex items-center min-w-0 gap-3">
-                <div class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white uppercase ring-2 ring-blue-500 shrink-0 text-sm">
-                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
-                </div>
-                <div class="truncate">
-                    <p class="text-xs font-semibold truncate text-white">{{ Auth::user()->name }}</p>
-                    {{-- FIX: hapus Auth::user()->roles (Spatie), ganti dengan kolom role biasa --}}
-                    <p class="text-[9px] text-neutral-400 font-bold uppercase tracking-wider">
-                        {{ Auth::user()->role ?? 'Admin' }}
-                    </p>
-                </div>
+<div class="p-4 bg-black/60 border-t border-neutral-800">
+
+    {{-- User Info --}}
+    <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center min-w-0 gap-2.5">
+            <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center font-bold text-white uppercase ring-2 ring-blue-500 shrink-0 text-xs">
+                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
             </div>
-            <form action="{{ route('logout') }}" method="POST" class="shrink-0">
-                @csrf
-                <button type="submit"
-                    class="text-neutral-400 hover:text-red-400 p-2 rounded transition-colors"
-                    title="Keluar">
-                    <i class="fa-solid fa-power-off"></i>
-                </button>
-            </form>
+            <div class="truncate">
+                <p class="text-xs font-semibold truncate text-white">{{ Auth::user()->name }}</p>
+                <p class="text-[9px] text-neutral-400 font-bold uppercase tracking-wider">
+                    {{ Auth::user()->role ?? 'Admin' }}
+                </p>
+            </div>
         </div>
+        <form action="{{ route('logout') }}" method="POST" class="shrink-0">
+            @csrf
+            <button type="submit"
+                class="text-neutral-400 hover:text-red-400 p-1.5 rounded transition-colors"
+                title="Keluar">
+                <i class="fa-solid fa-power-off text-sm"></i>
+            </button>
+        </form>
+    </div>
+
+    {{-- Tombol Pengaturan Profil --}}
+    <a href="{{ route('admin.pengaturan.edit') }}"
+        class="flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-150 w-full
+        {{ Route::is('admin.pengaturan.*') ? 'bg-blue-600 text-white' : 'text-neutral-400 hover:bg-neutral-800 hover:text-white' }}">
+        <i class="fa-solid fa-gear text-sm"></i>
+        <span class="text-xs font-semibold">Pengaturan Profil</span>
+    </a>
+
+</div>
     </aside>
 
     {{-- KONTEN UTAMA --}}

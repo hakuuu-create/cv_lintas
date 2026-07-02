@@ -22,9 +22,15 @@ Route::middleware(['auth'])->prefix('dashboard-admin')->name('admin.')->group(fu
     // Dashboard
     Route::get('/', [ProfilController::class, 'index'])->name('dashboard');
 
-    // Profil
-    Route::get('/profil',        [ProfilController::class, 'editProfil']  )->name('profil.edit');
-    Route::put('/profil/update', [ProfilController::class, 'updateProfil'])->name('profil.update');
+    // Pengaturan Profil (nama, logo, kontak, dll)
+    Route::get('/pengaturan-profil',        [ProfilController::class, 'editPengaturan']  )->name('pengaturan.edit');
+    Route::put('/pengaturan-profil/update', [ProfilController::class, 'updatePengaturan'])->name('pengaturan.update');
+
+    // Profil Perusahaan (tampil di landing page)
+    Route::get('/profil',         [ProfilController::class, 'profilIndex']  )->name('profil.index');
+    Route::post('/profil',        [ProfilController::class, 'profilStore']  )->name('profil.store');
+    Route::put('/profil/{id}',    [ProfilController::class, 'profilUpdate'] )->name('profil.update');
+    Route::delete('/profil/{id}', [ProfilController::class, 'profilDestroy'])->name('profil.destroy');
 
     // Layanan
     Route::get('/layanan',         [LayananController::class, 'index']  )->name('layanan.index');

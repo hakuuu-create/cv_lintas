@@ -373,66 +373,59 @@
     </section>
 
     {{-- 04 / Kreatif & Social media --}}
-    <section id="kreator" class="tunggu-scroll py-13 px-6 max-w-7xl mx-auto">
-        <div class="border-t border-tertiary pt-10 mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATIF DIVISION</p>
-            <h2 class="headline-lg text-primary uppercase md:col-span-2">Optimasi Tren Digital & Kreator</h2>
-        </div>
+<section id="kreator" class="tunggu-scroll py-13 px-6 max-w-7xl mx-auto">
+    <div class="border-t border-tertiary pt-10 mb-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATIF DIVISION</p>
+        <h2 class="headline-lg text-primary uppercase md:col-span-2">Optimasi Tren Digital & Kreator</h2>
+    </div>
 
-        <div
-            class="bg-surface border border-tertiary rounded-framer-md p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <div
+        class="bg-surface border border-tertiary rounded-framer-md p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-            <div class="space-y-6">
-                <div class="space-y-2">
-                    <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">Kreator Digital</p>
-                    <h3 class="headline-md text-primary uppercase">Strategi, Kreativitas & Inovasi</h3>
-                </div>
-
-                <p class="body-md text-secondary leading-relaxed">
-                    Kami merancang dan mengeksekusi materi kreatif yang disesuaikan dengan pola konsumsi konten masa
-                    kini. Berfokus pada optimalisasi di <span class="text-primary font-semibold">TikTok</span> dan <span
-                        class="text-primary font-semibold">Instagram Reels</span> guna membangun loyalitas komunitas
-                    digital yang solid.
-                </p>
-
-                <div class="space-y-3 pt-4">
-                    <h4 class="text-xs uppercase tracking-widest text-primary font-bold">Afiliasi Kreator Resmi:</h4>
-                    <div class="flex flex-wrap gap-2.5">
-                        @if($creator && $creator->username_1)
-                            <span
-                                class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">{{ $creator->username_1 }}</span>
-                        @endif
-                        @if($creator && $creator->username_2)
-                            <span
-                                class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">{{ $creator->username_2 }}</span>
-                        @endif
-                        @if($creator && $creator->username_3)
-                            <span
-                                class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">{{ $creator->username_3 }}</span>
-                        @endif
-                    </div>
-                </div>
+        <div class="space-y-6">
+            <div class="space-y-2">
+                <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">Kreator Digital</p>
+                <h3 class="headline-md text-primary uppercase">Strategi, Kreativitas & Inovasi</h3>
             </div>
 
-            <!-- Frame Foto Produksi Minimalis -->
-            <div
-                class="border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[4/3] relative flex items-center justify-center">
-                @if($creator && $creator->foto)
-                    <img src="{{ asset('storage/' . $creator->foto) }}"
-                        alt="[Ilustrasi produksi pembuatan konten media sosial]"
-                        class="w-full h-full object-cover grayscale opacity-80 hover:scale-105 hover:grayscale-0 transition-all duration-500"
-                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                @endif
-                <div
-                    class="{{ $creator && $creator->foto ? 'hidden' : '' }} absolute inset-0 flex-col items-center justify-center p-4 bg-neutral flex">
-                    <i class="fa-solid fa-clapperboard text-tertiary text-4xl mb-3"></i>
-                    <span class="text-xs text-secondary font-medium uppercase tracking-widest">PRODUKSI KONTEN
-                        SOSIAL</span>
+            <p class="body-md text-secondary leading-relaxed">
+                Kami merancang dan mengeksekusi materi kreatif yang disesuaikan dengan pola konsumsi konten masa
+                kini. Berfokus pada optimalisasi di <span class="text-primary font-semibold">TikTok</span> dan
+                <span class="text-primary font-semibold">Instagram Reels</span> guna membangun loyalitas komunitas
+                digital yang solid.
+            </p>
+
+            @if($kreator->count())
+            <div class="space-y-3 pt-4">
+                <h4 class="text-xs uppercase tracking-widest text-primary font-bold">Afiliasi Kreator Resmi:</h4>
+                <div class="flex flex-wrap gap-2.5">
+                    @foreach($kreator as $item)
+                        <span class="px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">
+                            @{{ $item->username }}
+                        </span>
+                    @endforeach
                 </div>
             </div>
-
+            @endif
         </div>
-    </section>
+
+        {{-- Frame Foto --}}
+        <div class="border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[4/3] relative flex items-center justify-center">
+            @php $kreatorDenganFoto = $kreator->whereNotNull('foto')->first(); @endphp
+            @if($kreatorDenganFoto)
+                <img src="{{ asset('storage/' . $kreatorDenganFoto->foto) }}"
+                    alt="Ilustrasi produksi konten"
+                    class="w-full h-full object-cover grayscale opacity-80 hover:scale-105 hover:grayscale-0 transition-all duration-500"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            @endif
+            <div class="{{ $kreatorDenganFoto ? 'hidden' : '' }} absolute inset-0 flex-col items-center justify-center p-4 bg-neutral flex">
+                <i class="fa-solid fa-clapperboard text-tertiary text-4xl mb-3"></i>
+                <span class="text-xs text-secondary font-medium uppercase tracking-widest">PRODUKSI KONTEN SOSIAL</span>
+            </div>
+        </div>
+
+    </div>
+</section>
 
     {{-- Alur Kerja --}}
     <section id="alur-kerja" class="tunggu-scroll py-20 px-6 max-w-7xl mx-auto scroll-mt-20">

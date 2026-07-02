@@ -29,9 +29,9 @@
                     <p class="text-slate-500 leading-relaxed">Kelola nama lembaga, sejarah pendirian, visi misi, kontak WhatsApp humas, hingga tautan admin sosial resmi.</p>
                 </div>
             </div>
-            <a href="{{ route('admin.profil.edit') }}" class="w-full text-center py-2.5 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">
-                Buka Pengaturan Profil
-            </a>
+            <a href="{{ route('admin.pengaturan.edit') }}" class="w-full text-center py-2.5 bg-slate-950 hover:bg-slate-800 text-white font-bold rounded-xl transition-all">
+    Buka Pengaturan Profil
+</a>
         </div>
 
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
