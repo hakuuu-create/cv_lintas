@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Lintas Tech Artomoro — Solusi Digital & Teknologi</title>
+    <title>{{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }} — Solusi Digital & Teknologi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -112,9 +112,8 @@
 
         <div class="flex flex-col items-center gap-4">
             <div class="text-center space-y-1">
-                <p class="text-secondary font-semibold text-xs tracking-[0.2em] uppercase">CV Lintas Tech</p>
-                <p class="text-3xl font-extrabold text-primary uppercase tracking-tight">
-                    Artomoro
+                <p class="text-secondary font-semibold text-xs tracking-[0.2em] uppercase">
+                    {{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech' }}
                 </p>
             </div>
         </div>
@@ -138,7 +137,7 @@
 
             <div class="flex items-center gap-3">
                 <span class="font-extrabold text-sm tracking-tight text-primary uppercase">
-                    Lintas Tech
+                    {{ $pengaturan->nama_perusahaan ?? 'Lintas Tech' }}
                 </span>
             </div>
 
@@ -184,16 +183,15 @@
         class="min-h-screen flex flex-col items-center justify-center px-6 text-center max-w-5xl mx-auto pt-20 scroll-mt-20">
         <div class="flex flex-col items-center space-y-4">
             <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">Transformasi Bisnis Digital</p>
-            @if ($profil && $profil->logo_perusahaan)
-                <img src="{{ asset('storage/' . $profil->logo_perusahaan) }}" alt="Logo"
+            @if ($pengaturan && $pengaturan->logo_perusahaan)
+                <img src="{{ asset('storage/' . $pengaturan->logo_perusahaan) }}" alt="Logo"
                     class="w-24 h-24 object-contain drop-shadow-2xl rounded-2xl">
             @else
                 <img src="{{ asset('img/logo.webp') }}" alt="Logo"
                     class="w-24 h-24 object-contain drop-shadow-2xl rounded-2xl">
             @endif
             <h1 class="headline-display text-primary uppercase">
-                CV LINTAS TECH <br>
-                <span class="text-secondary">ARTOMORO</span>
+                {{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }}
             </h1>
         </div>
 
@@ -214,7 +212,7 @@
         </div>
     </header>
 
-    {{-- PORFIL --}}
+    {{-- PROFIL --}}
     <section id="profil" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
         <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
             <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">01 / PROFIL</p>
@@ -225,16 +223,40 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div class="space-y-6">
                 <h3 class="text-xs uppercase tracking-widest text-primary font-bold">Tentang Perusahaan</h3>
-                <p class="body-md text-secondary leading-relaxed text-justify">
-                    CV Lintas Tech Artomoro adalah firma solusi teknologi independen yang bergerak di bidang optimasi
-                    digital berkelanjutan. Kami berkomitmen menyediakan layanan rekayasa perangkat lunak berskala
-                    tinggi, kampanye pemasaran presisi, produksi konten kreatif, serta penyediaan fondasi infrastruktur
-                    IT yang aman.
-                </p>
-                <p class="body-md text-secondary leading-relaxed text-justify">
-                    Fokus kami adalah menyelaraskan efisiensi operasional dengan kehadiran brand digital modern demi
-                    tercapainya pertumbuhan konversi bisnis Anda secara stabil dan terukur.
-                </p>
+
+                @if ($pengaturan && $pengaturan->sejarah_singkat)
+                    <p class="body-md text-secondary leading-relaxed text-justify">
+                        {{ $pengaturan->sejarah_singkat }}
+                    </p>
+                @else
+                    <p class="body-md text-secondary leading-relaxed text-justify">
+                        Belum ada data sejarah/profil perusahaan. Silakan lengkapi melalui halaman admin &raquo;
+                        Pengaturan Profil.
+                    </p>
+                @endif
+
+                @if ($pengaturan && $pengaturan->visi)
+                    <div class="pt-2">
+                        <h4 class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Visi</h4>
+                        <p class="body-md text-secondary leading-relaxed text-justify">{{ $pengaturan->visi }}</p>
+                    </div>
+                @endif
+
+                @if ($pengaturan && $pengaturan->misi)
+                    <div class="pt-2">
+                        <h4 class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Misi</h4>
+                        <ul class="space-y-1.5 body-md text-secondary leading-relaxed">
+                            @foreach (preg_split('/\r\n|\r|\n/', $pengaturan->misi) as $poin)
+                                @if (trim($poin) !== '')
+                                    <li class="flex gap-2">
+                                        <i class="fa-solid fa-check text-primary text-xs mt-1.5 shrink-0"></i>
+                                        <span>{{ trim($poin) }}</span>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
 
             <div
@@ -242,8 +264,8 @@
 
                 <div
                     class="bg-neutral-950 rounded-1xl overflow-hidden aspect-[2/1] relative flex items-center justify-center border border-slate-900">
-                    @if ($profil && $profil->gambar_perusahaan)
-                        <img src="{{ asset('storage/' . $profil->gambar_perusahaan) }}" alt="Logo"
+                    @if ($pengaturan && $pengaturan->gambar_perusahaan)
+                        <img src="{{ asset('storage/' . $pengaturan->gambar_perusahaan) }}" alt="Foto Perusahaan"
                             class="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 hover:scale-105 hover:grayscale-0"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     @else
@@ -262,7 +284,30 @@
                 </div>
             </div>
         </div>
+
+        {{-- Konten profil tambahan dari admin > Profil Perusahaan --}}
+        @if ($profils->count())
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach ($profils as $item)
+                    <div class="bg-surface border border-tertiary rounded-framer-md p-6 space-y-3">
+                        @if ($item->foto)
+                            <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80">
+                                <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}"
+                                    class="w-full h-full object-cover">
+                            </div>
+                        @endif
+                        @if ($item->sub_judul)
+                            <p class="text-xs text-secondary uppercase tracking-widest font-bold">{{ $item->sub_judul }}</p>
+                        @endif
+                        <h4 class="headline-sm text-primary">{{ $item->judul }}</h4>
+                        <p class="body-md text-secondary leading-relaxed text-justify">{{ $item->konten }}</p>
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </section>
+
+    {{-- LAYANAN --}}
     <section id="layanan" class="tunggu-scroll py-24 bg-surface border-y border-tertiary scroll-mt-20">
         <div class="max-w-7xl mx-auto px-6">
 
@@ -271,62 +316,30 @@
                 <h2 class="headline-lg text-primary uppercase md:col-span-2">Layanan Kami</h2>
             </div>
 
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-px bg-tertiary border border-tertiary rounded-framer-md overflow-hidden">
-
-                <div class="bg-neutral p-10 space-y-6 hover:bg-neutral-80/40 transition-colors duration-300">
-                    <div class="text-primary text-xl flex items-center gap-3">
-                        <i class="fa-solid fa-code"></i>
-                        <span class="text-xs uppercase tracking-widest font-semibold text-secondary">02.1</span>
-                    </div>
-                    <h3 class="headline-sm text-primary uppercase">Web Development</h3>
-                    <p class="body-md text-secondary leading-relaxed">
-                        Pengembangan arsitektur informasi digital tangguh menggunakan kerangka kerja modern. Kami
-                        merancang sistem aplikasi web responsif, integrasi API pihak ketiga secara mulus, serta panel
-                        administrasi yang aman.
-                    </p>
+            @if ($layanan->count())
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-px bg-tertiary border border-tertiary rounded-framer-md overflow-hidden">
+                    @foreach ($layanan as $index => $item)
+                        <div class="bg-neutral p-10 space-y-6 hover:bg-neutral-80/40 transition-colors duration-300">
+                            <div class="text-primary text-xl flex items-center gap-3">
+                                <i class="fa-solid {{ $item->icon ?: 'fa-briefcase' }}"></i>
+                                <span class="text-xs uppercase tracking-widest font-semibold text-secondary">
+                                    02.{{ $index + 1 }}
+                                </span>
+                            </div>
+                            <h3 class="headline-sm text-primary uppercase">{{ $item->nama_layanan }}</h3>
+                            <p class="body-md text-secondary leading-relaxed">
+                                {{ $item->deskripsi_singkat }}
+                            </p>
+                        </div>
+                    @endforeach
                 </div>
-
-                <div class="bg-neutral p-10 space-y-6 hover:bg-neutral-80/40 transition-colors duration-300">
-                    <div class="text-primary text-xl flex items-center gap-3">
-                        <i class="fa-solid fa-arrow-trend-up"></i>
-                        <span class="text-xs uppercase tracking-widest font-semibold text-secondary">02.2</span>
-                    </div>
-                    <h3 class="headline-sm text-primary uppercase">SEO & SEM Marketing</h3>
-                    <p class="body-md text-secondary leading-relaxed">
-                        Optimalisasi keterpaparan organik pada mesin pencari utama. Kami menyusun analisis kata kunci
-                        strategis, perbaikan struktur halaman teknis, dan manajemen kampanye iklan berbayar (Google Ads)
-                        dengan fokus ROI tinggi.
-                    </p>
+            @else
+                <div class="text-center text-secondary py-16 border border-dashed border-tertiary rounded-framer-md">
+                    <i class="fa-solid fa-briefcase text-3xl mb-3 block opacity-30"></i>
+                    Belum ada layanan yang ditambahkan.
                 </div>
-
-                <div class="bg-neutral p-10 space-y-6 hover:bg-neutral-80/40 transition-colors duration-300">
-                    <div class="text-primary text-xl flex items-center gap-3">
-                        <i class="fa-solid fa-hashtag"></i>
-                        <span class="text-xs uppercase tracking-widest font-semibold text-secondary">02.3</span>
-                    </div>
-                    <h3 class="headline-sm text-primary uppercase">Content & Social Media</h3>
-                    <p class="body-md text-secondary leading-relaxed">
-                        Produksi konten audio-visual vertikal berkualitas tinggi disesuaikan dengan algoritma media
-                        sosial mutakhir. Meningkatkan retensi pemirsa dan membangun interaksi aktif dengan representasi
-                        brand yang selaras.
-                    </p>
-                </div>
-
-                <div class="bg-neutral p-10 space-y-6 hover:bg-neutral-80/40 transition-colors duration-300">
-                    <div class="text-primary text-xl flex items-center gap-3">
-                        <i class="fa-solid fa-server"></i>
-                        <span class="text-xs uppercase tracking-widest font-semibold text-secondary">02.4</span>
-                    </div>
-                    <h3 class="headline-sm text-primary uppercase">IT Infrastructure</h3>
-                    <p class="body-md text-secondary leading-relaxed">
-                        Penyediaan solusi hosting dengan stabilitas tinggi, pendaftaran domain korporat profesional,
-                        konfigurasi proteksi keamanan digital (SSL), serta audit analitik performa infrastruktur server
-                        berkala.
-                    </p>
-                </div>
-
-            </div>
+            @endif
         </div>
     </section>
 
@@ -339,7 +352,7 @@
         </div>
 
         <div class="space-y-8">
-            @foreach($portofolios as $portofolio)
+            @forelse($portofolios as $portofolio)
                 {{-- Card Portofolio Dinamis --}}
                 <div
                     class="tunggu-scroll bg-surface border border-tertiary rounded-framer-md p-6 md:p-8 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -367,7 +380,12 @@
                         @endif
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="text-center text-secondary py-16 border border-dashed border-tertiary rounded-framer-md">
+                    <i class="fa-solid fa-clipboard-list text-3xl mb-3 block opacity-30"></i>
+                    Belum ada portofolio aktif yang ditampilkan.
+                </div>
+            @endforelse
         </div>
 
     </section>
@@ -523,41 +541,56 @@
 
             <div class="space-y-5 text-left">
                 <h4 class="font-extrabold text-sm tracking-widest text-primary uppercase">
-                    CV Lintas Tech Artomoro
+                    {{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }}
                 </h4>
-                <a href="https://maps.app.goo.gl/ky8Ly6eq6xUhJbkv6" target="_blank"
-                    class="leading-relaxed text-secondary hover:text-primary flex items-start gap-3 group transition-colors">
-                    <i
-                        class="fa-solid fa-location-dot text-primary mt-1 shrink-0 group-hover:scale-110 transition-transform"></i>
-                    <span class="group-hover:underline body-md">
-                        Jl. Sunan Muria No.25, Dami, Ampeldento, Kec. Pakis, Kabupaten Malang, Jawa Timur 65154
-                    </span>
-                </a>
-                <a href="https://wa.me/+628563639797" target="_blank"
-                    class="leading-relaxed text-secondary hover:text-primary flex items-start gap-3 group transition-colors">
-                    <i
-                        class="fa-solid fa-phone text-primary mt-1 shrink-0 group-hover:scale-110 transition-transform"></i>
-                    <span class="group-hover:underline body-md">
-                        +628563639797 / +6285791436300
-                    </span>
-                </a>
+
+                @if ($pengaturan && $pengaturan->alamat)
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($pengaturan->alamat) }}" target="_blank"
+                        class="leading-relaxed text-secondary hover:text-primary flex items-start gap-3 group transition-colors">
+                        <i
+                            class="fa-solid fa-location-dot text-primary mt-1 shrink-0 group-hover:scale-110 transition-transform"></i>
+                        <span class="group-hover:underline body-md">
+                            {{ $pengaturan->alamat }}
+                        </span>
+                    </a>
+                @endif
+
+                @if ($pengaturan && $pengaturan->whatsapp_kontak)
+                    <a href="https://wa.me/62{{ ltrim($pengaturan->whatsapp_kontak, '0') }}" target="_blank"
+                        class="leading-relaxed text-secondary hover:text-primary flex items-start gap-3 group transition-colors">
+                        <i
+                            class="fa-solid fa-phone text-primary mt-1 shrink-0 group-hover:scale-110 transition-transform"></i>
+                        <span class="group-hover:underline body-md">
+                            +62{{ ltrim($pengaturan->whatsapp_kontak, '0') }}
+                        </span>
+                    </a>
+                @endif
             </div>
 
             <div class="space-y-4 flex flex-col items-start md:pl-8">
                 <h4 class="font-bold text-primary text-xs uppercase tracking-widest">Koneksi Sosial</h4>
                 <div class="flex gap-6 text-lg pt-1">
-                    <a href="https://instagram.com" target="_blank"
-                        class="hover:text-primary transition-colors text-secondary">
-                        <i class="fa-brands fa-instagram"></i>
-                    </a>
-                    <a href="https://facebook.com" target="_blank"
-                        class="hover:text-primary transition-colors text-secondary">
-                        <i class="fa-brands fa-facebook"></i>
-                    </a>
-                    <a href="https://youtube.com" target="_blank"
-                        class="hover:text-primary transition-colors text-secondary">
-                        <i class="fa-brands fa-youtube"></i>
-                    </a>
+                    @if ($pengaturan && $pengaturan->instagram_link)
+                        <a href="{{ $pengaturan->instagram_link }}" target="_blank"
+                            class="hover:text-primary transition-colors text-secondary">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                    @endif
+                    @if ($pengaturan && $pengaturan->facebook_link)
+                        <a href="{{ $pengaturan->facebook_link }}" target="_blank"
+                            class="hover:text-primary transition-colors text-secondary">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                    @endif
+                    @if ($pengaturan && $pengaturan->youtube_link)
+                        <a href="{{ $pengaturan->youtube_link }}" target="_blank"
+                            class="hover:text-primary transition-colors text-secondary">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                    @endif
+                    @if (!$pengaturan || (!$pengaturan->instagram_link && !$pengaturan->facebook_link && !$pengaturan->youtube_link))
+                        <span class="text-secondary/50 text-xs normal-case">Belum ada tautan sosial media.</span>
+                    @endif
                 </div>
             </div>
 
@@ -580,7 +613,7 @@
         <div
             class="max-w-7xl mx-auto px-6 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-secondary tracking-tight">
             <div class="text-center sm:text-left leading-relaxed">
-                © 2026 CV Lintas Tech Artomoro. Seluruh Hak Cipta Dilindungi. <br>
+                © {{ date('Y') }} {{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }}. Seluruh Hak Cipta Dilindungi. <br>
                 Direkayasa secara berkelanjutan.
             </div>
             <div class="flex gap-4">

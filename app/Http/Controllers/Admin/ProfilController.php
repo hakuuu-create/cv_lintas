@@ -20,10 +20,10 @@ class ProfilController extends Controller
     // PENGATURAN PROFIL (nama, logo, kontak, dll)
     // ==========================================
     public function editPengaturan()
-    {
-        $pengaturan = PengaturanProfil::first() ?? new PengaturanProfil();
-        return view('admin.pengaturan_profil', compact('pengaturan'));
-    }
+{
+    $profil = PengaturanProfil::first() ?? new PengaturanProfil();
+    return view('admin.pengaturan_profil', compact('profil'));
+}
 
     public function updatePengaturan(Request $request)
     {
