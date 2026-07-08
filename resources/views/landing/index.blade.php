@@ -216,96 +216,42 @@
     <section id="profil" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
         <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
             <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">01 / PROFIL</p>
-            <h2 class="headline-lg text-primary uppercase md:col-span-2">Membantu Bisnis Beradaptasi dengan Era Baru
-            </h2>
+            
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <div class="space-y-6">
-                <h3 class="text-xs uppercase tracking-widest text-primary font-bold">Tentang Perusahaan</h3>
-
-                @if ($pengaturan && $pengaturan->sejarah_singkat)
-                    <p class="body-md text-secondary leading-relaxed text-justify">
-                        {{ $pengaturan->sejarah_singkat }}
-                    </p>
-                @else
-                    <p class="body-md text-secondary leading-relaxed text-justify">
-                        Belum ada data sejarah/profil perusahaan. Silakan lengkapi melalui halaman admin &raquo;
-                        Pengaturan Profil.
-                    </p>
-                @endif
-
-                @if ($pengaturan && $pengaturan->visi)
-                    <div class="pt-2">
-                        <h4 class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Visi</h4>
-                        <p class="body-md text-secondary leading-relaxed text-justify">{{ $pengaturan->visi }}</p>
-                    </div>
-                @endif
-
-                @if ($pengaturan && $pengaturan->misi)
-                    <div class="pt-2">
-                        <h4 class="text-xs uppercase tracking-widest text-primary font-bold mb-2">Misi</h4>
-                        <ul class="space-y-1.5 body-md text-secondary leading-relaxed">
-                            @foreach (preg_split('/\r\n|\r|\n/', $pengaturan->misi) as $poin)
-                                @if (trim($poin) !== '')
-                                    <li class="flex gap-2">
-                                        <i class="fa-solid fa-check text-primary text-xs mt-1.5 shrink-0"></i>
-                                        <span>{{ trim($poin) }}</span>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            </div>
-
-            <div
-                class="border border-slate-800/80 rounded-[5px] p-3 bg-slate-900/40 backdrop-blur-md max-w-[624px] mx-auto shadow-xl">
-
-                <div
-                    class="bg-neutral-950 rounded-1xl overflow-hidden aspect-[2/1] relative flex items-center justify-center border border-slate-900">
-                    @if ($pengaturan && $pengaturan->gambar_perusahaan)
-                        <img src="{{ asset('storage/' . $pengaturan->gambar_perusahaan) }}" alt="Foto Perusahaan"
-                            class="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 hover:scale-105 hover:grayscale-0"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    @else
-                        <img src="{{ asset('img/no_foto.jpg') }}" alt="Logo"
-                            class="w-full h-full object-cover grayscale opacity-90 transition-all duration-700 hover:scale-105 hover:grayscale-0"
-                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    @endif
-
-                    <div
-                        class="hidden absolute inset-0 flex-col items-center justify-center p-6 text-center bg-slate-950/80 backdrop-blur-sm animate-fade-in">
-                        <i class="fa-solid fa-microchip text-blue-500 text-4xl mb-3 animate-pulse"></i>
-                        <span class="text-xs text-slate-400 font-bold tracking-widest uppercase">STUDIO PRODUKSI
-                            TEKNOLOGI</span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
+        
         {{-- Konten profil tambahan dari admin > Profil Perusahaan --}}
-        @if ($profils->count())
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-                @foreach ($profils as $item)
-                    <div class="bg-surface border border-tertiary rounded-framer-md p-6 space-y-3">
-                        @if ($item->foto)
-                            <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80">
-                                <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}"
-                                    class="w-full h-full object-cover">
-                            </div>
-                        @endif
-                        @if ($item->sub_judul)
-                            <p class="text-xs text-secondary uppercase tracking-widest font-bold">{{ $item->sub_judul }}</p>
-                        @endif
-                        <h4 class="headline-sm text-primary">{{ $item->judul }}</h4>
-                        <p class="body-md text-secondary leading-relaxed text-justify">{{ $item->konten }}</p>
-                    </div>
-                @endforeach
+@if ($profils->count())
+    <div class="mt-16 space-y-20 px-4 md:px-8">
+        @foreach ($profils as $item)
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+                {{-- Teks: Judul, Sub Judul, Konten (Kiri) --}}
+                <div class="space-y-4 order-2 md:order-1">
+                    @if ($item->sub_judul)
+                        <p class="text-xs text-secondary uppercase tracking-widest font-bold">{{ $item->sub_judul }}</p>
+                    @endif
+                    <h4 class="headline-lg text-primary uppercase">{{ $item->judul }}</h4>
+                    <p class="body-md text-secondary leading-relaxed text-justify">{{ $item->konten }}</p>
+                </div>
+
+                {{-- Gambar (Kanan) --}}
+                <div class="order-1 md:order-2">
+                    @if ($item->foto)
+                        <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80">
+                            <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}"
+                                class="w-full h-full object-cover">
+                        </div>
+                    @else
+                        <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80 flex items-center justify-center">
+                            <i class="fa-solid fa-image text-tertiary text-3xl"></i>
+                        </div>
+                    @endif
+                </div>
+
             </div>
-        @endif
-    </section>
+        @endforeach
+    </div>
+@endif
 
     {{-- LAYANAN --}}
     <section id="layanan" class="tunggu-scroll py-24 bg-surface border-y border-tertiary scroll-mt-20">
