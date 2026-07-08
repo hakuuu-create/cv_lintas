@@ -13,7 +13,10 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('username'); 
-            $table->string('platform')->default('TikTok'); // TikTok / Instagram
+            $table->string('platform')->default('Instagram'); // TikTok / Instagram
+            $table->string('judul')->nullable()->after('nama');
+            $table->string('sub_judul')->nullable()->after('judul');
+            $table->text('deskripsi')->nullable()->after('sub_judul');
             $table->string('foto')->nullable();
             $table->timestamps();
         });

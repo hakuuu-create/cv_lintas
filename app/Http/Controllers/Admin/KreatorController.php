@@ -18,10 +18,13 @@ class KreatorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama'     => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'platform' => 'required|string',
-            'foto'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'nama'      => 'required|string|max:255',
+            'judul'     => 'nullable|string|max:255',
+            'sub_judul' => 'nullable|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'username'  => 'required|string|max:255',
+            'platform'  => 'required|string',
+            'foto'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $fotoPath = null;
@@ -30,10 +33,13 @@ class KreatorController extends Controller
         }
 
         Kreator::create([
-            'nama'     => $request->nama,
-            'username' => $request->username,
-            'platform' => $request->platform,
-            'foto'     => $fotoPath,
+            'nama'      => $request->nama,
+            'judul'     => $request->judul,
+            'sub_judul' => $request->sub_judul,
+            'deskripsi' => $request->deskripsi,
+            'username'  => $request->username,
+            'platform'  => $request->platform,
+            'foto'      => $fotoPath,
         ]);
 
         return redirect()->back()->with('success', 'Kreator berhasil ditambahkan!');
@@ -44,15 +50,21 @@ class KreatorController extends Controller
         $kreator = Kreator::findOrFail($id);
 
         $request->validate([
-            'nama'     => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'platform' => 'required|string',
-            'foto'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'nama'      => 'required|string|max:255',
+            'judul'     => 'nullable|string|max:255',
+            'sub_judul' => 'nullable|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'username'  => 'required|string|max:255',
+            'platform'  => 'required|string',
+            'foto'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $kreator->nama     = $request->nama;
-        $kreator->username = $request->username;
-        $kreator->platform = $request->platform;
+        $kreator->nama      = $request->nama;
+        $kreator->judul     = $request->judul;
+        $kreator->sub_judul = $request->sub_judul;
+        $kreator->deskripsi = $request->deskripsi;
+        $kreator->username  = $request->username;
+        $kreator->platform  = $request->platform;
 
         if ($request->hasFile('foto')) {
             if ($kreator->foto) {

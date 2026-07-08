@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Kreator extends Model
 {
     protected $table = 'kreator';
-    protected $fillable = ['nama', 'username', 'platform', 'foto'];
+    protected $fillable = ['nama', 'judul', 'sub_judul', 'deskripsi','username', 'platform', 'foto'];
 }

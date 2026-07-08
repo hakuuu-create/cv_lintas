@@ -56,10 +56,16 @@
             <div class="p-4 flex flex-col gap-1 flex-1">
                 <h4 class="font-bold text-slate-800 text-sm">{{ $item->nama }}</h4>
                 <p class="text-slate-400 font-medium">@{{ $item->username }}</p>
+                @if($item->judul)
+                    <p class="text-slate-500 text-[11px] mt-1 line-clamp-2">{{ $item->judul }}</p>
+                @endif
                 <div class="flex gap-2 pt-3 mt-auto border-t border-slate-100">
                     <button onclick="bukaModalEdit(
                             {{ $item->id }},
                             '{{ addslashes($item->nama) }}',
+                            '{{ addslashes($item->judul ?? '') }}',
+                            '{{ addslashes($item->sub_judul ?? '') }}',
+                            '{{ addslashes($item->deskripsi ?? '') }}',
                             '{{ addslashes($item->username) }}',
                             '{{ $item->platform }}',
                             '{{ $item->foto ? asset('storage/' . $item->foto) : '' }}'
@@ -101,6 +107,27 @@
         <form action="{{ route('admin.kreator.store') }}" method="POST" enctype="multipart/form-data"
             class="p-6 space-y-4 text-xs">
             @csrf
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1.5">Judul
+                    <span class="text-slate-400 font-normal">(opsional)</span>
+                </label>
+                <input type="text" name="judul" placeholder="Contoh: Konten Kreator Digital"
+                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1.5">Sub Judul
+                    <span class="text-slate-400 font-normal">(opsional)</span>
+                </label>
+                <input type="text" name="sub_judul" placeholder="Contoh: Strategi & Kreativitas"
+                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1.5">Deskripsi
+                    <span class="text-slate-400 font-normal">(opsional)</span>
+                </label>
+                <textarea name="deskripsi" rows="3" placeholder="Jelaskan peran atau kontribusi kreator ini..."
+                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"></textarea>
+            </div>
             <div>
                 <label class="block font-semibold text-slate-700 mb-1.5">Nama Lengkap <span class="text-rose-500">*</span></label>
                 <input type="text" name="nama" required placeholder="Contoh: Budi Santoso"
@@ -161,6 +188,27 @@
             class="p-6 space-y-4 text-xs">
             @csrf
             @method('PUT')
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1.5">Judul
+                    <span class="text-slate-400 font-normal">(opsional)</span>
+                </label>
+                <input type="text" id="edit_judul" name="judul"
+                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1.5">Sub Judul
+                    <span class="text-slate-400 font-normal">(opsional)</span>
+                </label>
+                <input type="text" id="edit_sub_judul" name="sub_judul"
+                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
+            </div>
+            <div>
+                <label class="block font-semibold text-slate-700 mb-1.5">Deskripsi
+                    <span class="text-slate-400 font-normal">(opsional)</span>
+                </label>
+                <textarea id="edit_deskripsi" name="deskripsi" rows="3"
+                    class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"></textarea>
+            </div>
             <div>
                 <label class="block font-semibold text-slate-700 mb-1.5">Nama Lengkap <span class="text-rose-500">*</span></label>
                 <input type="text" id="edit_nama" name="nama" required
@@ -242,11 +290,14 @@
         document.getElementById('modalTambah').classList.add('hidden');
         document.getElementById('modalTambah').classList.remove('flex');
     }
-    function bukaModalEdit(id, nama, username, platform, fotoUrl) {
+    function bukaModalEdit(id, nama, judul, subJudul, deskripsi, username, platform, fotoUrl) {
         document.getElementById('formEdit').action = `/dashboard-admin/kreator/${id}`;
-        document.getElementById('edit_nama').value     = nama;
-        document.getElementById('edit_username').value = username;
-        document.getElementById('edit_platform').value = platform;
+        document.getElementById('edit_nama').value      = nama;
+        document.getElementById('edit_judul').value     = judul;
+        document.getElementById('edit_sub_judul').value = subJudul;
+        document.getElementById('edit_deskripsi').value = deskripsi;
+        document.getElementById('edit_username').value  = username;
+        document.getElementById('edit_platform').value  = platform;
         const wrap = document.getElementById('edit_preview_wrap');
         const img  = document.getElementById('edit_preview_img');
         if (fotoUrl) { img.src = fotoUrl; wrap.classList.remove('hidden'); }
