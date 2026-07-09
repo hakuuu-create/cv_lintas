@@ -92,8 +92,8 @@
 {{-- MODAL TAMBAH --}}
 <div id="modalTambah" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="tutupModalTambah()"></div>
-    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md z-10 overflow-hidden">
-        <div class="px-6 py-5 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md z-10 overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="px-6 py-5 border-b border-slate-100 bg-slate-50 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center text-blue-700 border border-blue-100">
                     <i class="fa-solid fa-plus"></i>
@@ -105,7 +105,7 @@
             </button>
         </div>
         <form action="{{ route('admin.kreator.store') }}" method="POST" enctype="multipart/form-data"
-            class="p-6 space-y-4 text-xs">
+            class="p-6 space-y-4 text-xs overflow-y-auto custom-scrollbar">
             @csrf
             <div>
                 <label class="block font-semibold text-slate-700 mb-1.5">Judul
@@ -172,8 +172,8 @@
 {{-- MODAL EDIT --}}
 <div id="modalEdit" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="tutupModalEdit()"></div>
-    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md z-10 overflow-hidden">
-        <div class="px-6 py-5 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
+    <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-md z-10 overflow-hidden flex flex-col max-h-[90vh]">
+        <div class="px-6 py-5 border-b border-slate-100 bg-slate-50 flex items-center justify-between shrink-0">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center text-amber-700 border border-amber-100">
                     <i class="fa-solid fa-pen-to-square"></i>
@@ -185,7 +185,7 @@
             </button>
         </div>
         <form id="formEdit" action="" method="POST" enctype="multipart/form-data"
-            class="p-6 space-y-4 text-xs">
+            class="p-6 space-y-4 text-xs overflow-y-auto custom-scrollbar">
             @csrf
             @method('PUT')
             <div>

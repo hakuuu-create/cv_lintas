@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }} — Solusi Digital & Teknologi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.0/css/all.min.css" crossorigin="anonymous">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -207,7 +207,7 @@
             </a>
             <a href="#kontak"
                 class="h-10 px-6 inline-flex items-center justify-center bg-transparent text-primary border border-tertiary text-sm font-semibold rounded-framer-sm hover:bg-neutral-80 transition-colors uppercase tracking-wide">
-                Hubungi Konsultan
+                Mari Berkolaborasi!
             </a>
         </div>
     </header>
@@ -339,8 +339,8 @@
     {{-- 04 / Kreatif & Social media --}}
 <section id="kreator" class="tunggu-scroll py-13 px-6 max-w-7xl mx-auto scroll-mt-20">
     <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATIF DIVISION</p>
-        <h2 class="headline-lg text-primary uppercase md:col-span-2">Optimasi Tren Digital & Kreator</h2>
+        <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATOR</p>
+        <!-- <h2 class="headline-lg text-primary uppercase md:col-span-2">Optimasi Tren Digital & Kreator</h2> -->
     </div>
 
     @if($kreator->count())

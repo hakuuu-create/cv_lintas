@@ -53,7 +53,7 @@
                        class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
             </div>
 
-            {{-- Logo & Gambar --}}
+            <!-- {{-- Logo & Gambar --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
                 {{-- Logo --}}
@@ -108,7 +108,7 @@
                            class="w-full px-2 py-1.5 rounded-lg border border-slate-200 text-[11px] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-100 file:text-slate-700">
                     <p class="text-[10px] text-slate-400">Maks 5 MB · JPG, PNG, WEBP · Tampil di section Profil</p>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         {{-- ===== SECTION 2: TENTANG ===== --}}

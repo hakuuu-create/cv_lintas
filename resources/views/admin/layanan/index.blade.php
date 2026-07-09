@@ -47,7 +47,7 @@
                     <td class="px-5 py-4">
                         @if($item->icon)
                             <div class="w-9 h-9 bg-blue-50 border border-blue-100 rounded-lg flex items-center justify-center text-blue-700">
-                                <i class="fa-solid {{ $item->icon }}"></i>
+                                <i class="{{ $item->icon }}"></i>
                             </div>
                         @else
                             <div class="w-9 h-9 bg-slate-100 rounded-lg flex items-center justify-center text-slate-400">
@@ -112,8 +112,8 @@
             </div>
             <div>
                 <label class="block font-semibold text-slate-700 mb-1.5">Icon FontAwesome
-                    <span class="text-slate-400 font-normal">(opsional, contoh: fa-code)</span>
-                </label>
+    <span class="text-slate-400 font-normal">(opsional, contoh: fa-solid fa-code)</span>
+</label>
                 <div class="relative">
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
                         <i class="fa-solid fa-icons"></i>
@@ -164,9 +164,9 @@
                     class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"></textarea>
             </div>
             <div>
-                <label class="block font-semibold text-slate-700 mb-1.5">Icon FontAwesome
-                    <span class="text-slate-400 font-normal">(opsional)</span>
-                </label>
+               <label class="block font-semibold text-slate-700 mb-1.5">Icon FontAwesome
+    <span class="text-slate-400 font-normal">(opsional, contoh: fa-solid fa-code)</span>
+</label>
                 <div class="relative">
                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">
                         <i class="fa-solid fa-icons"></i>
