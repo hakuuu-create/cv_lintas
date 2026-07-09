@@ -212,46 +212,52 @@
         </div>
     </header>
 
-    {{-- PROFIL --}}
+     {{-- PROFIL --}}
     <section id="profil" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
         <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
             <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">01 / PROFIL</p>
-            
+            <!-- <h2 class="headline-lg text-primary uppercase md:col-span-2">Tentang Perusahaan Kami</h2> -->
         </div>
 
         {{-- Konten profil tambahan dari admin > Profil Perusahaan --}}
-@if ($profils->count())
-    <div class="mt-16 space-y-20 px-4 md:px-8">
-        @foreach ($profils as $item)
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        @if ($profils->count())
+            <div class="mt-16 space-y-20 px-4 md:px-8">
+                @foreach ($profils as $item)
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
 
-                {{-- Teks: Judul, Sub Judul, Konten (Kiri) --}}
-                <div class="space-y-4 order-2 md:order-1">
-                    @if ($item->sub_judul)
-                        <p class="text-xs text-secondary uppercase tracking-widest font-bold">{{ $item->sub_judul }}</p>
-                    @endif
-                    <h4 class="headline-lg text-primary uppercase">{{ $item->judul }}</h4>
-                    <p class="body-md text-secondary leading-relaxed text-justify">{{ $item->konten }}</p>
-                </div>
-
-                {{-- Gambar (Kanan) --}}
-                <div class="order-1 md:order-2">
-                    @if ($item->foto)
-                        <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80">
-                            <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}"
-                                class="w-full h-full object-cover">
+                        {{-- Teks: Judul, Sub Judul, Konten (Kiri) --}}
+                        <div class="space-y-4 order-2 md:order-1">
+                            @if ($item->sub_judul)
+                                <p class="text-xs text-secondary uppercase tracking-widest font-bold">{{ $item->sub_judul }}</p>
+                            @endif
+                            <h4 class="headline-lg text-primary uppercase">{{ $item->judul }}</h4>
+                            <p class="body-md text-secondary leading-relaxed text-justify">{{ $item->konten }}</p>
                         </div>
-                    @else
-                        <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80 flex items-center justify-center">
-                            <i class="fa-solid fa-image text-tertiary text-3xl"></i>
-                        </div>
-                    @endif
-                </div>
 
+                        {{-- Gambar (Kanan) --}}
+                        <div class="order-1 md:order-2">
+                            @if ($item->foto)
+                                <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80">
+                                    <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}"
+                                        class="w-full h-full object-cover">
+                                </div>
+                            @else
+                                <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80 flex items-center justify-center">
+                                    <i class="fa-solid fa-image text-tertiary text-3xl"></i>
+                                </div>
+                            @endif
+                        </div>
+
+                    </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
-@endif
+        @else
+            <div class="mt-16 text-center text-secondary py-16 border border-dashed border-tertiary rounded-framer-md">
+                <i class="fa-solid fa-building-user text-3xl mb-3 block opacity-30"></i>
+                Belum ada konten profil yang ditambahkan.
+            </div>
+        @endif
+    </section>
 
     {{-- LAYANAN --}}
     <section id="layanan" class="tunggu-scroll py-24 bg-surface border-y border-tertiary scroll-mt-20">
@@ -337,10 +343,10 @@
     </section>
 
     {{-- 04 / Kreatif & Social media --}}
-<section id="kreator" class="tunggu-scroll py-13 px-6 max-w-7xl mx-auto scroll-mt-20">
+<section id="kreator" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
     <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
         <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATOR</p>
-        <!-- <h2 class="headline-lg text-primary uppercase md:col-span-2">Optimasi Tren Digital & Kreator</h2> -->
+        <!-- <h2 class="headline-lg text-primary uppercase md:col-span-2">Kreator & Konten Digital</h2> -->
     </div>
 
     @if($kreator->count())
