@@ -370,7 +370,7 @@
                                 @else
                                     <i class="fa-brands fa-instagram"></i>
                                 @endif
-                                @{{ $item->username }}
+                                &#64{{ $item->username }}
                             </span>
                         </div>
                     </div>

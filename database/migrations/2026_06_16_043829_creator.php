@@ -14,9 +14,9 @@ return new class extends Migration
             $table->string('nama');
             $table->string('username'); 
             $table->string('platform')->default('Instagram'); // TikTok / Instagram
-            $table->string('judul')->nullable()->after('nama');
-            $table->string('sub_judul')->nullable()->after('judul');
-            $table->text('deskripsi')->nullable()->after('sub_judul');
+            $table->string('judul')->nullable();
+            $table->string('sub_judul')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
         });
