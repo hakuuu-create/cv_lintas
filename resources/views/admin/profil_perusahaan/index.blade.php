@@ -114,12 +114,16 @@
             <form action="{{ route('admin.profil.store') }}" method="POST" enctype="multipart/form-data" id="myForm"
                 class="p-6 space-y-4 text-xs overflow-y-auto">
                 @csrf
+
+                {{-- Judul --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Judul <span
                             class="text-rose-500">*</span></label>
                     <input type="text" name="judul" required placeholder="Contoh: Tentang Kami"
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- Sub Judul --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Sub Judul
                         <span class="text-slate-400 font-normal">(opsional)</span>
@@ -127,20 +131,26 @@
                     <input type="text" name="sub_judul" placeholder="Contoh: Siapa Kami"
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- Konten --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Konten <span
                             class="text-rose-500">*</span></label>
                     <textarea name="konten" rows="5" required placeholder="Isi konten profil perusahaan..."
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"></textarea>
                 </div>
+
+                {{-- Foto (Opsional) --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Foto
                         <span class="text-slate-400 font-normal">(opsional)</span>
                     </label>
-                    <input type="file" name="foto" accept="image/*"
+                    <input type="file" name="foto" accept="image/*" id="fotoTambah"
                         class="w-full px-2 py-1.5 rounded-xl border border-slate-200 text-[11px] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-100 file:text-slate-700">
-                    <p class="text-[10px] text-slate-400 mt-1">Maks 5 MB (JPG, PNG, WEBP)</p>
+                    <p class="text-[10px] text-slate-400 mt-1" id="errorTambahFoto">Maks 5 MB (JPG, PNG, WEBP)</p>
                 </div>
+
+                {{-- Button Simpan --}}
                 <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
                     <button type="button" onclick="tutupModalTambah()"
                         class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all">Batal</button>
@@ -173,12 +183,16 @@
             <form id="formEdit" method="POST" enctype="multipart/form-data" class="p-6 space-y-4 text-xs overflow-y-auto">
                 @csrf
                 @method('PUT')
+
+                {{-- Judul --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Judul <span
                             class="text-rose-500">*</span></label>
                     <input type="text" id="edit_judul" name="judul" required
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- Sub judul --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Sub Judul
                         <span class="text-slate-400 font-normal">(opsional)</span>
@@ -186,12 +200,16 @@
                     <input type="text" id="edit_sub_judul" name="sub_judul"
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- Konten --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Konten <span
                             class="text-rose-500">*</span></label>
                     <textarea id="edit_konten" name="konten" rows="5" required
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"></textarea>
                 </div>
+
+                {{-- Ganti Foto --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Ganti Foto
                         <span class="text-slate-400 font-normal">(kosongkan jika tidak ingin mengganti)</span>
@@ -200,9 +218,12 @@
                         <img id="edit_preview_img" src="" alt="Preview"
                             class="w-32 h-20 object-cover rounded-lg border border-slate-200">
                     </div>
-                    <input type="file" name="foto" accept="image/*"
+                    <input type="file" name="foto" accept="image/*" id="fotoEdit"
                         class="w-full px-2 py-1.5 rounded-xl border border-slate-200 text-[11px] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-100 file:text-slate-700">
+                        <p class="text-[10px] text-slate-400 mt-1" id="errorEditFoto"></p>
                 </div>
+
+                {{-- Button Update --}}
                 <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
                     <button type="button" onclick="tutupModalEdit()"
                         class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all">Batal</button>
@@ -312,12 +333,47 @@
                 btnEdit.disabled = true;
                 btnEdit.innerHTML =
                     `
-                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Menyimpan...
-                        `;
+                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Menyimpan...
+                    `;
+            });
+        }
+
+        /**
+         * Validasi ukuran file foto
+         **/ 
+        const fotoTambahInput = document.getElementById('fotoTambah');
+        const errorTambahFotoMsg = document.getElementById('errorTambahFoto');
+        if (fotoTambahInput && errorTambahFotoMsg) {
+            fotoTambahInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file && file.size > 5 * 1024 * 1024) {
+                    errorTambahFotoMsg.textContent = 'Foto maksimal 5MB';
+                    errorTambahFotoMsg.className = 'text-[10px] text-rose-500 font-bold mt-1 animate-pulse';
+                    this.value = ''; // Reset input agar tidak dikirim
+                } else {
+                    errorTambahFotoMsg.textContent = 'Maks 5 MB (JPG, PNG, WEBP)';
+                    errorTambahFotoMsg.className = 'text-[10px] text-slate-400 mt-1';
+                }
+            });
+        }
+
+        const fotoEditInput = document.getElementById('fotoEdit');
+        const errorEditFotoMsg = document.getElementById('errorEditFoto');
+        if (fotoEditInput && errorEditFotoMsg) {
+            fotoEditInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file && file.size > 5 * 1024 * 1024) {
+                    errorEditFotoMsg.textContent = 'Foto maksimal 5MB';
+                    errorEditFotoMsg.className = 'text-[10px] text-rose-500 font-bold mt-1 animate-pulse';
+                    this.value = ''; // Reset input agar tidak dikirim
+                } else {
+                    errorEditFotoMsg.textContent = 'Maks 2 MB (JPG, PNG)';
+                    errorEditFotoMsg.className = 'text-[10px] text-slate-400 mt-1';
+                }
             });
         }
     </script>

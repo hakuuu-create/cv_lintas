@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }} — Solusi Digital & Teknologi</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.0/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.0/css/all.min.css"
+        crossorigin="anonymous">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -212,7 +213,7 @@
         </div>
     </header>
 
-     {{-- PROFIL --}}
+    {{-- PROFIL --}}
     <section id="profil" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
         <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
             <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">01 / PROFIL</p>
@@ -242,7 +243,8 @@
                                         class="w-full h-full object-cover">
                                 </div>
                             @else
-                                <div class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80 flex items-center justify-center">
+                                <div
+                                    class="rounded-framer-sm overflow-hidden aspect-video bg-neutral-80 flex items-center justify-center">
                                     <i class="fa-solid fa-image text-tertiary text-3xl"></i>
                                 </div>
                             @endif
@@ -343,62 +345,98 @@
     </section>
 
     {{-- 04 / Kreatif & Social media --}}
-<section id="kreator" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
-    <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATOR</p>
-        <!-- <h2 class="headline-lg text-primary uppercase md:col-span-2">Kreator & Konten Digital</h2> -->
-    </div>
+    <section id="kreator" class="tunggu-scroll py-24 px-6 max-w-7xl mx-auto scroll-mt-20">
+        <div class="border-t border-tertiary pt-10 mb-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <p class="text-xs text-secondary uppercase tracking-[0.2em] font-semibold">04 / KREATOR</p>
+            <!-- <h2 class="headline-lg text-primary uppercase md:col-span-2">Kreator & Konten Digital</h2> -->
+        </div>
 
-    @if($kreator->count())
-        <div class="space-y-16">
-            @foreach($kreator as $item)
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        @if($kreator->count())
+            <div class="space-y-16">
+                @foreach($kreator as $item)
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
 
-                    {{-- Teks: Judul, Sub Judul, Deskripsi (Kiri) --}}
-                    <div class="space-y-4 order-2 md:order-1">
-                        @if($item->sub_judul)
-                            <p class="text-xs text-secondary uppercase tracking-widest font-bold">{{ $item->sub_judul }}</p>
-                        @endif
-                        <h3 class="headline-lg text-primary uppercase">{{ $item->judul ?? $item->nama }}</h3>
-                        @if($item->deskripsi)
-                            <p class="body-md text-secondary leading-relaxed">{{ $item->deskripsi }}</p>
-                        @endif
-                        <div class="pt-2">
-                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">
-                                @if($item->platform === 'TikTok')
-                                    <i class="fa-brands fa-tiktok"></i>
-                                @else
-                                    <i class="fa-brands fa-instagram"></i>
+                        {{-- Teks: Judul, Sub Judul, Deskripsi (Kiri) --}}
+                        <div class="space-y-4 order-2 md:order-1">
+                            @if($item->sub_judul)
+                                <p class="text-xs text-secondary uppercase tracking-widest font-bold">{{ $item->sub_judul }}</p>
+                            @endif
+
+                            <h3 class="headline-lg text-primary uppercase">{{ $item->judul ?? $item->nama }}</h3>
+
+                            @if($item->deskripsi)
+                                <p class="body-md text-secondary leading-relaxed">{{ $item->deskripsi }}</p>
+                            @endif
+
+                            {{-- KREATOR LIST --}}
+                            <div class="pt-2 flex flex-wrap gap-2">
+
+                                {{-- Kreator 1 (Wajib) --}}
+                                <span
+                                    class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">
+                                    @if($item->platform === 'TikTok')
+                                        <i class="fa-brands fa-tiktok"></i>
+                                    @else
+                                        <i class="fa-brands fa-instagram"></i>
+                                    @endif
+                                    &#64;{{ $item->username }}
+                                </span>
+
+                                {{-- Kreator 2 (Opsional) --}}
+                                @if($item->username_2)
+                                    <span
+                                        class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">
+                                        @if(($item->platform_2 ?? 'TikTok') === 'TikTok')
+                                            <i class="fa-brands fa-tiktok"></i>
+                                        @else
+                                            <i class="fa-brands fa-instagram"></i>
+                                        @endif
+                                        &#64;{{ $item->username_2 }}
+                                    </span>
                                 @endif
-                                &#64{{ $item->username }}
-                            </span>
-                        </div>
-                    </div>
 
-                    {{-- Foto (Kanan) --}}
-                    <div class="order-1 md:order-2 border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[4/3] relative flex items-center justify-center">
-                        @if($item->foto)
-                            <img src="{{ asset('storage/' . $item->foto) }}"
-                                alt="{{ $item->judul ?? $item->nama }}"
-                                class="w-full h-full object-cover grayscale opacity-80 hover:scale-105 hover:grayscale-0 transition-all duration-500"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        @endif
-                        <div class="{{ $item->foto ? 'hidden' : '' }} absolute inset-0 flex-col items-center justify-center p-4 bg-neutral flex">
-                            <i class="fa-solid fa-clapperboard text-tertiary text-4xl mb-3"></i>
-                            <span class="text-xs text-secondary font-medium uppercase tracking-widest">PRODUKSI KONTEN SOSIAL</span>
-                        </div>
-                    </div>
+                                {{-- Kreator 3 (Opsional) --}}
+                                @if($item->username_3)
+                                    <span
+                                        class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-neutral border border-tertiary rounded-framer-sm text-xs font-medium text-secondary hover:text-primary hover:border-primary transition-colors cursor-pointer">
+                                        @if(($item->platform_3 ?? 'TikTok') === 'TikTok')
+                                            <i class="fa-brands fa-tiktok"></i>
+                                        @else
+                                            <i class="fa-brands fa-instagram"></i>
+                                        @endif
+                                        &#64;{{ $item->username_3 }}
+                                    </span>
+                                @endif
 
-                </div>
-            @endforeach
-        </div>
-    @else
-        <div class="text-center text-secondary py-16 border border-dashed border-tertiary rounded-framer-md">
-            <i class="fa-solid fa-clapperboard text-3xl mb-3 block opacity-30"></i>
-            Belum ada data kreator yang ditambahkan.
-        </div>
-    @endif
-</section>
+                            </div>
+                        </div>
+
+                        {{-- Foto (Kanan) --}}
+                        <div
+                            class="order-1 md:order-2 border border-tertiary rounded-framer-sm overflow-hidden bg-neutral-80 aspect-[4/3] relative flex items-center justify-center">
+                            @if($item->foto)
+                                <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul ?? $item->nama }}"
+                                    class="w-full h-full object-cover"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            @endif
+                            <div
+                                class="{{ $item->foto ? 'hidden' : '' }} absolute inset-0 flex-col items-center justify-center p-4 bg-neutral flex">
+                                <i class="fa-solid fa-clapperboard text-tertiary text-4xl mb-3"></i>
+                                <span class="text-xs text-secondary font-medium uppercase tracking-widest">PRODUKSI KONTEN
+                                    SOSIAL</span>
+                            </div>
+                        </div>
+
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <div class="text-center text-secondary py-16 border border-dashed border-tertiary rounded-framer-md">
+                <i class="fa-solid fa-clapperboard text-3xl mb-3 block opacity-30"></i>
+                Belum ada data kreator yang ditambahkan.
+            </div>
+        @endif
+    </section>
 
     {{-- Alur Kerja --}}
     <section id="alur-kerja" class="tunggu-scroll py-20 px-6 max-w-7xl mx-auto scroll-mt-20">
@@ -500,7 +538,8 @@
                 </h4>
 
                 @if ($pengaturan && $pengaturan->alamat)
-                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($pengaturan->alamat) }}" target="_blank"
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($pengaturan->alamat) }}"
+                        target="_blank"
                         class="leading-relaxed text-secondary hover:text-primary flex items-start gap-3 group transition-colors">
                         <i
                             class="fa-solid fa-location-dot text-primary mt-1 shrink-0 group-hover:scale-110 transition-transform"></i>
@@ -550,7 +589,8 @@
             </div>
 
             <div class="space-y-4">
-                <h4 class="font-bold text-primary text-xs uppercase tracking-widest">Hubungi Kami / Kolaborasi Digital</h4>
+                <h4 class="font-bold text-primary text-xs uppercase tracking-widest">Hubungi Kami / Kolaborasi Digital
+                </h4>
                 <p class="body-md text-secondary leading-relaxed">
                     Ajukan penawaran, rancangan konsep, atau konsultasi kebutuhan sistem informasi Anda langsung kepada
                     tim spesialis kami.
@@ -568,7 +608,8 @@
         <div
             class="max-w-7xl mx-auto px-6 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-secondary tracking-tight">
             <div class="text-center sm:text-left leading-relaxed">
-                © {{ date('Y') }} {{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }}. Seluruh Hak Cipta Dilindungi. <br>
+                © {{ date('Y') }} {{ $pengaturan->nama_perusahaan ?? 'CV Lintas Tech Artomoro' }}. Seluruh Hak Cipta
+                Dilindungi. <br>
                 Direkayasa secara berkelanjutan.
             </div>
             <div class="flex gap-4">

@@ -31,9 +31,9 @@ class ProfilController extends Controller
 
         $request->validate([
             'nama_perusahaan'   => 'required|string|max:255',
-            'sejarah_singkat'   => 'required',
-            'visi'              => 'required',
-            'misi'              => 'required',
+            'sejarah_singkat'   => 'nullable',
+            'visi'              => 'nullable',
+            'misi'              => 'nullable',
             'alamat'            => 'required',
             'whatsapp_kontak'   => 'required',
             'logo_perusahaan'   => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',

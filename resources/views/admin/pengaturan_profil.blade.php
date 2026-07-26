@@ -112,17 +112,17 @@
         </div>
 
         {{-- ===== SECTION 2: TENTANG ===== --}}
-        <div class="px-6 py-4 border-b border-slate-100 bg-slate-50/30 flex items-center gap-3">
+        {{-- <div class="px-6 py-4 border-b border-slate-100 bg-slate-50/30 flex items-center gap-3">
             <div class="w-8 h-8 bg-violet-50 rounded-lg flex items-center justify-center text-violet-600 border border-violet-100">
                 <i class="fa-solid fa-align-left text-sm"></i>
             </div>
             <h3 class="font-bold text-sm text-slate-700">Tentang & Visi Misi</h3>
-        </div>
+        </div> --}}
 
-        <div class="p-6 space-y-5 border-b border-slate-100">
+        {{-- <div class="p-6 space-y-5 border-b border-slate-100"> --}}
 
             {{-- Sejarah --}}
-            <div>
+            {{-- <div>
                 <label class="block font-semibold text-slate-700 mb-1.5">
                     Tentang / Sejarah Singkat <span class="text-rose-500">*</span>
                 </label>
@@ -131,10 +131,10 @@
                           class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"
                 >{{ old('sejarah_singkat', $profil->sejarah_singkat) }}</textarea>
                 <p class="text-[10px] text-slate-400 mt-1">Tampil sebagai deskripsi utama di section Hero & Profil.</p>
-            </div>
+            </div> --}}
 
             {{-- Visi & Misi --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">
                         Visi <span class="text-rose-500">*</span>
@@ -156,7 +156,7 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- ===== SECTION 3: KONTAK ===== --}}
         <div class="px-6 py-4 border-b border-slate-100 bg-slate-50/30 flex items-center gap-3">

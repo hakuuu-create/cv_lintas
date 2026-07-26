@@ -65,13 +65,13 @@
                         <p class="text-slate-500 leading-relaxed line-clamp-2 flex-1">{{ $item->deskripsi }}</p>
                         <div class="flex gap-2 pt-2 border-t border-slate-100">
                             <button onclick="bukaModalEdit(
-                                    {{ $item->id }},
-                                    '{{ addslashes($item->judul) }}',
-                                    '{{ addslashes($item->sub_judul) }}',
-                                    '{{ addslashes($item->deskripsi) }}',
-                                    {{ $item->is_active }},
-                                    '{{ $item->foto ? asset('storage/' . $item->foto) : '' }}'
-                                )"
+                                                                    {{ $item->id }},
+                                                                    '{{ addslashes($item->judul) }}',
+                                                                    '{{ addslashes($item->sub_judul) }}',
+                                                                    '{{ addslashes($item->deskripsi) }}',
+                                                                    {{ $item->is_active }},
+                                                                    '{{ $item->foto ? asset('storage/' . $item->foto) : '' }}'
+                                                                )"
                                 class="flex-1 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold rounded-lg border border-amber-200 transition-all text-center">
                                 <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
                             </button>
@@ -111,31 +111,41 @@
             <form action="{{ route('admin.portofolio.store') }}" method="POST" enctype="multipart/form-data" id="myForm"
                 class="p-6 space-y-4 text-xs overflow-y-auto">
                 @csrf
+
+                {{-- Judul --}}
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1.5">Judul Proyek <span
+                    <label class="block font-semibold text-slate-700 mb-1.5">Judul <span
                             class="text-rose-500">*</span></label>
                     <input type="text" name="judul" required placeholder="Contoh: Website Toko Online Batik"
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- Sub Judul --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Sub Judul <span
                             class="text-rose-500">*</span></label>
                     <input type="text" name="sub_judul" required placeholder="Contoh: E-Commerce / Web Development"
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- Deskripsi --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Deskripsi <span
                             class="text-rose-500">*</span></label>
                     <textarea name="deskripsi" rows="3" required placeholder="Jelaskan proyek ini..."
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"></textarea>
                 </div>
+
+                {{-- Foto --}}
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1.5">Foto Proyek <span
+                    <label class="block font-semibold text-slate-700 mb-1.5">Foto<span
                             class="text-rose-500">*</span></label>
-                    <input type="file" name="foto" accept="image/*" required
+                    <input type="file" name="foto" id="fotoTambah" accept="image/*" required
                         class="w-full px-2 py-1.5 rounded-xl border border-slate-200 text-[11px] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-100 file:text-slate-700">
-                    <p class="text-[10px] text-slate-400 mt-1">Maks 5 MB (JPG, PNG, WEBP)</p>
+                    <p class="text-[10px] text-slate-400 mt-1" id="errorTambahFoto">Maks 5 MB (JPG, PNG, WEBP)</p>
                 </div>
+
+                {{-- Status --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Status Tampil</label>
                     <select name="is_active"
@@ -147,6 +157,8 @@
                         <i class="fa-solid fa-triangle-exclamation mr-1"></i>Maksimal 3 portofolio aktif yang bisa tampil.
                     </p>
                 </div>
+
+                {{-- Tombol Simpan --}}
                 <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
                     <button type="button" onclick="tutupModalTambah()"
                         class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all">Batal</button>
@@ -180,24 +192,32 @@
                 class="p-6 space-y-4 text-xs overflow-y-auto">
                 @csrf
                 @method('PUT')
+
+                {{-- Judul --}}
                 <div>
-                    <label class="block font-semibold text-slate-700 mb-1.5">Judul Proyek <span
+                    <label class="block font-semibold text-slate-700 mb-1.5">Judul<span
                             class="text-rose-500">*</span></label>
                     <input type="text" id="edit_judul" name="judul" required
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- SUb Judul --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Sub Judul <span
                             class="text-rose-500">*</span></label>
                     <input type="text" id="edit_sub_judul" name="sub_judul" required
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all">
                 </div>
+
+                {{-- Deskripsi --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Deskripsi <span
                             class="text-rose-500">*</span></label>
                     <textarea id="edit_deskripsi" name="deskripsi" rows="3" required
                         class="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-600/5 transition-all leading-relaxed"></textarea>
                 </div>
+
+                {{-- Foto --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Ganti Foto
                         <span class="text-slate-400 font-normal">(kosongkan jika tidak ingin mengganti)</span>
@@ -206,9 +226,12 @@
                         <img id="edit_preview_img" src="" alt="Preview"
                             class="w-32 h-20 object-cover rounded-lg border border-slate-200">
                     </div>
-                    <input type="file" name="foto" accept="image/*"
+                    <input type="file" name="foto" id="fotoEdit" accept="image/*"
                         class="w-full px-2 py-1.5 rounded-xl border border-slate-200 text-[11px] file:mr-2 file:py-1 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-semibold file:bg-slate-100 file:text-slate-700">
+                    <p class="text-[10px] text-slate-400 mt-1" id="errorEditFoto"></p>
                 </div>
+
+                {{-- STatus --}}
                 <div>
                     <label class="block font-semibold text-slate-700 mb-1.5">Status Tampil</label>
                     <select id="edit_is_active" name="is_active"
@@ -217,6 +240,8 @@
                         <option value="0">Nonaktif (disembunyikan)</option>
                     </select>
                 </div>
+
+                {{-- Tombol Update --}}
                 <div class="pt-2 flex justify-end gap-2 border-t border-slate-100">
                     <button type="button" onclick="tutupModalEdit()"
                         class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all">Batal</button>
@@ -297,24 +322,26 @@
         }
 
         /**
-            * Function untuk mengatasi double submit
-            **/
-
+        * Function untuk mengatasi double submit
+        **/
         // Tambah / Add
         const formTambah = document.getElementById('myForm');
         const btnTambah = document.getElementById('btnAdd');
 
         if (formTambah && btnTambah) {
             formTambah.addEventListener('submit', function () {
-                btnTambah.disabled = true;
-                btnTambah.innerHTML =
-                    `
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Menyimpan...
-                    `;
+                // Berikan delay 0ms (microtask) agar pemicuan submit form dan request file selesai dieksekusi browser
+                setTimeout(() => {
+                    btnTambah.disabled = true;
+                    btnTambah.innerHTML =
+                        `
+                            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Menyimpan...
+                        `;
+                }, 0);
             });
         }
 
@@ -324,15 +351,50 @@
 
         if (formEdit && btnEdit) {
             formEdit.addEventListener('submit', function () {
-                btnEdit.disabled = true;
-                btnEdit.innerHTML =
-                    `
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Menyimpan...
-                    `;
+                setTimeout(() => {
+                    btnEdit.disabled = true;
+                    btnEdit.innerHTML =
+                        `
+                                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Menyimpan...
+                            `;
+                }, 0)
+            });
+        }
+
+        // Validasi ukuran file foto
+        const fotoTambahInput = document.getElementById('fotoTambah');
+        const errorTambahFotoMsg = document.getElementById('errorTambahFoto');
+        if (fotoTambahInput && errorTambahFotoMsg) {
+            fotoTambahInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file && file.size > 5 * 1024 * 1024) {
+                    errorTambahFotoMsg.textContent = 'Foto maksimal 5MB';
+                    errorTambahFotoMsg.className = 'text-[10px] text-rose-500 font-bold mt-1 animate-pulse';
+                    this.value = ''; // Reset input agar tidak dikirim
+                } else {
+                    errorTambahFotoMsg.textContent = 'Maks 5 MB (JPG, PNG, WEBP)';
+                    errorTambahFotoMsg.className = 'text-[10px] text-slate-400 mt-1';
+                }
+            });
+        }
+
+        const fotoEditInput = document.getElementById('fotoEdit');
+        const errorEditFotoMsg = document.getElementById('errorEditFoto');
+        if (fotoEditInput && errorEditFotoMsg) {
+            fotoEditInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (file && file.size > 5 * 1024 * 1024) {
+                    errorEditFotoMsg.textContent = 'Foto maksimal 5MB';
+                    errorEditFotoMsg.className = 'text-[10px] text-rose-500 font-bold mt-1 animate-pulse';
+                    this.value = ''; // Reset input agar tidak dikirim
+                } else {
+                    errorEditFotoMsg.textContent = 'Maks 5 MB (JPG, PNG, WEBP)';
+                    errorEditFotoMsg.className = 'text-[10px] text-slate-400 mt-1';
+                }
             });
         }
     </script>

@@ -22,7 +22,7 @@ class PortofolioController extends Controller
             'judul'     => 'required|string|max:255',
             'sub_judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'foto'      => 'required|image|mimes:jpeg,png,jpg,webp|max:5048',
+            'foto'      => 'required|image|mimes:jpeg,png,jpg,webp|max:5120',
             'is_active' => 'required|boolean',
         ]);
 
@@ -57,7 +57,7 @@ class PortofolioController extends Controller
             'judul'     => 'required|string|max:255',
             'sub_judul' => 'required|string|max:255',
             'deskripsi' => 'required|string',
-            'foto'      => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5048',
+            'foto'      => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'is_active' => 'required|boolean',
         ]);
 
