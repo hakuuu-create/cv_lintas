@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="p-4 flex flex-col gap-1 flex-1">
-                        <h4 class="font-bold text-slate-800 text-sm">{{ $item->nama }}</h4>
+                        <h4 class="font-bold text-slate-800 text-sm">{{ $item->judul }}</h4>
                         <p class="text-slate-400 font-medium">&#64;{{ $item->username }}</p>
                         @if($item->judul)
                             <p class="text-slate-500 text-[11px] mt-1 line-clamp-2">{{ $item->judul }}</p>
