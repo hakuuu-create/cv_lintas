@@ -550,7 +550,7 @@
             </div>
 
             <div class="space-y-4">
-                <h4 class="font-bold text-primary text-xs uppercase tracking-widest">Kolaborasi Digital</h4>
+                <h4 class="font-bold text-primary text-xs uppercase tracking-widest">Hubungi Kami / Kolaborasi Digital</h4>
                 <p class="body-md text-secondary leading-relaxed">
                     Ajukan penawaran, rancangan konsep, atau konsultasi kebutuhan sistem informasi Anda langsung kepada
                     tim spesialis kami.
