@@ -82,21 +82,21 @@
 
                         <div class="flex gap-2 pt-3 mt-auto border-t border-slate-100">
                             <button onclick="bukaModalEdit(
-                                                            {{ $item->id }},
-                                                            '{{ addslashes($item->nama) }}',
-                                                            '{{ addslashes($item->username) }}',
-                                                            '{{ $item->platform }}',
-                                                            '{{ addslashes($item->nama_2 ?? '') }}',
-                                                            '{{ addslashes($item->username_2 ?? '') }}',
-                                                            '{{ $item->platform_2 ?? '' }}',
-                                                            '{{ addslashes($item->nama_3 ?? '') }}',
-                                                            '{{ addslashes($item->username_3 ?? '') }}',
-                                                            '{{ $item->platform_3 ?? '' }}',
-                                                            '{{ addslashes($item->judul ?? '') }}',
-                                                            '{{ addslashes($item->sub_judul ?? '') }}',
-                                                            '{{ addslashes($item->deskripsi ?? '') }}',
-                                                            '{{ $item->foto ? asset('storage/' . $item->foto) : '' }}'
-                                                        )"
+                                                                            {{ $item->id }},
+                                                                            '{{ addslashes($item->nama) }}',
+                                                                            '{{ addslashes($item->username) }}',
+                                                                            '{{ $item->platform }}',
+                                                                            '{{ addslashes($item->nama_2 ?? '') }}',
+                                                                            '{{ addslashes($item->username_2 ?? '') }}',
+                                                                            '{{ $item->platform_2 ?? '' }}',
+                                                                            '{{ addslashes($item->nama_3 ?? '') }}',
+                                                                            '{{ addslashes($item->username_3 ?? '') }}',
+                                                                            '{{ $item->platform_3 ?? '' }}',
+                                                                            '{{ addslashes($item->judul ?? '') }}',
+                                                                            '{{ addslashes($item->sub_judul ?? '') }}',
+                                                                            '{{ addslashes($item->deskripsi ?? '') }}',
+                                                                            '{{ $item->foto ? asset('storage/' . $item->foto) : '' }}'
+                                                                        )"
                                 class="flex-1 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 font-bold rounded-lg border border-amber-200 transition-all text-center">
                                 <i class="fa-solid fa-pen-to-square mr-1"></i> Edit
                             </button>
@@ -383,8 +383,15 @@
                 </div>
 
                 {{-- EDIT KREATOR 2 --}}
-                <div id="edit_wrapper_creator_2" class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
-                    <span class="font-bold text-slate-700 block">Kreator 2 (Opsional)</span>
+                <div id="edit_wrapper_creator_2"
+                    class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-3 relative">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-slate-700">Kreator 2 (Opsional)</span>
+                        <button type="button" onclick="resetEditCreator(2)"
+                            class="text-rose-500 hover:text-rose-700 font-bold text-[11px] flex items-center gap-1">
+                            <i class="fa-solid fa-trash-can"></i> Kosongkan
+                        </button>
+                    </div>
 
                     <div>
                         <label class="block font-medium text-slate-600 mb-1">Nama Lengkap</label>
@@ -394,7 +401,7 @@
 
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="block font-medium text-slate-600 mb-1">Username Media Sosial</label>
+                            <label class="block font-medium text-slate-600 mb-1">Username / Handle</label>
                             <div class="relative">
                                 <span
                                     class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">&#64;</span>
@@ -415,8 +422,15 @@
                 </div>
 
                 {{-- EDIT KREATOR 3 --}}
-                <div id="edit_wrapper_creator_3" class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
-                    <span class="font-bold text-slate-700 block">Kreator 3 (Opsional)</span>
+                <div id="edit_wrapper_creator_3"
+                    class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-3 relative">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-slate-700">Kreator 3 (Opsional)</span>
+                        <button type="button" onclick="resetEditCreator(3)"
+                            class="text-rose-500 hover:text-rose-700 font-bold text-[11px] flex items-center gap-1">
+                            <i class="fa-solid fa-trash-can"></i> Kosongkan
+                        </button>
+                    </div>
 
                     <div>
                         <label class="block font-medium text-slate-600 mb-1">Nama Lengkap</label>
@@ -426,7 +440,7 @@
 
                     <div class="grid grid-cols-2 gap-2">
                         <div>
-                            <label class="block font-medium text-slate-600 mb-1">Username Media Sosial</label>
+                            <label class="block font-medium text-slate-600 mb-1">Username / Handle</label>
                             <div class="relative">
                                 <span
                                     class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">&#64;</span>
@@ -536,6 +550,18 @@
             document.getElementById('btnTambahCreator').classList.remove('hidden');
         }
 
+        function resetEditCreator(number) {
+            if (number === 2) {
+                document.getElementById('edit_nama_2').value = '';
+                document.getElementById('edit_username_2').value = '';
+                document.getElementById('edit_platform_2').value = 'TikTok';
+            } else if (number === 3) {
+                document.getElementById('edit_nama_3').value = '';
+                document.getElementById('edit_username_3').value = '';
+                document.getElementById('edit_platform_3').value = 'TikTok';
+            }
+        }
+
         function bukaModalTambah() {
             document.getElementById('modalTambah').classList.remove('hidden');
             document.getElementById('modalTambah').classList.add('flex');
@@ -601,10 +627,10 @@
             formTambah.addEventListener('submit', function () {
                 btnTambah.disabled = true;
                 btnTambah.innerHTML = `
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg> Menyimpan...`;
+                                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg> Menyimpan...`;
             });
         }
 
@@ -614,10 +640,10 @@
             formEdit.addEventListener('submit', function () {
                 btnEdit.disabled = true;
                 btnEdit.innerHTML = `
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg> Menyimpan...`;
+                                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg> Menyimpan...`;
             });
         }
 
